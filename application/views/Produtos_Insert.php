@@ -30,7 +30,7 @@ $this->load->view('Admin__Header');
         echo form_input('nome', set_value('nome', @$produto->nome), array('autofocus' => 'autofocus'));
 
         echo form_label("Observação", "observacao");
-        echo form_textarea('observacao', html_entity_decode(set_value('observacao', @$produto->observacao)));
+        echo form_textarea('observacao', (set_value('observacao', @$produto->observacao)));
 
         if ($id) {
             echo form_submit("enviar", "Editar", array("class" => "btn btn-info"));

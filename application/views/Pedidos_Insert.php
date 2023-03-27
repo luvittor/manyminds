@@ -30,7 +30,7 @@ $this->load->view('Admin__Header');
         echo form_dropdown('colaboradores_id', $colaboradores, set_value('colaboradores_id', @$pedido->colaboradores_id));
 
         echo form_label("Observação", "observacao");
-        echo form_textarea('observacao', html_entity_decode(set_value('observacao', @$pedido->observacao)));
+        echo form_textarea('observacao', (set_value('observacao', @$pedido->observacao)));
 
         if ($id) {
             echo form_submit("enviar", "Editar", array("class" => "btn btn-info"));

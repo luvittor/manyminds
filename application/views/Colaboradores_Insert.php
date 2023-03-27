@@ -45,7 +45,7 @@ $this->load->view('Admin__Header');
         echo form_input('data_contratacao', set_value('data_contratacao', @$colaborador->data_contratacao), array('placeholder' => 'dd/mm/aaaa'));
 
         echo form_label("Observação", "observacao");
-        echo form_textarea('observacao', html_entity_decode(set_value('observacao', @$colaborador->observacao)));
+        echo form_textarea('observacao', (set_value('observacao', @$colaborador->observacao)));
 
         if ($id) {
             echo form_submit("enviar", "Editar", array("class" => "btn btn-info"));
