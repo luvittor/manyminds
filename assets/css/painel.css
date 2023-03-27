@@ -1,0 +1,35 @@
+label {
+	display: block;
+	font-size: 13px;
+	font-weight: 300;
+}
+
+input,
+textarea, 
+select {
+	display: block;
+	margin-bottom: 15px;
+	padding: 5px 2%;
+	width: 100%;
+}
+
+input[type="file"] {
+    padding-left: 0;
+}
+
+input.botao {
+    width: auto;
+}
+
+.msg-box {
+	background: #f1f2ea;
+	border: 1px solid #c7cbab;
+	padding: 5px 10px;
+	margin-bottom: 15px;
+	color: #727272;
+}
+
+.msg-box p {
+	margin: 0;
+	padding: 2px 0px;
+}

@@ -1,0 +1,207 @@
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
+
+class Admin extends CI_Controller
+{
+
+	function __construct()
+	{
+		parent::__construct();
+
+		$this->load->helper('url');
+		$this->load->helper('form');
+		$this->load->library("form_validation");
+		$this->load->model('Users_Model');
+		$this->load->helper('funcoes');
+	}
+
+	public function index()
+	{
+		// verifica se existe usuario logado
+		verifica_login();
+
+		$this->load->view('Admin');
+	}
+
+	public function login()
+	{
+		$data["msg"] = "";
+
+		// validacao de formulario
+		$this->form_validation->set_rules('login', 'Login', 'trim|required|min_length[5]|max_length[10]');
+		$this->form_validation->set_rules('password', 'Senha', 'required|min_length[6]');
+
+		if ($this->form_validation->run()) {
+			// pega os dados do formulario
+			$login = $this->input->post('login');
+			$password = $this->input->post('password');
+
+			// recupera usuario do banco de dados
+			$usuario = $this->Users_Model->getUser($login);
+
+			// verifica se usuario existe e se a senha esta correta
+			if (!$usuario) {
+				$data["msg"] = "Login ou Senha Inválidos. Tente Novamente. (2)";
+				$this->load->view('Admin_Login', $data);
+			} elseif (!password_verify($password, $usuario->password)) {
+				// acima verificou se a senha esta correta
+				$data["msg"] = "Login ou Senha Inválidos. Tente Novamente. (1)";
+				$this->load->view('Admin_Login', $data);
+			} elseif ($usuario->disable) {
+				// acima verificou se o usuario esta desabilitado
+				$data["msg"] = "Usuário desabilitado. Contate o administrador.";
+				$this->load->view('Admin_Login', $data);
+			} else {
+				// cria sessao com o usuario logado
+				$this->session->userdata["logged_user"] = $usuario;
+				redirect("admin", "refresh");
+			}
+		} else {
+			// mostra formulario de login
+			$data["msg"] = validation_errors();
+			$this->load->view('Admin_Login', $data);
+		}
+	}
+
+	public function logged_out()
+	{
+		// mostra formulario de login com a msg abaixo
+		$data["msg"] = "Faça login para acessar a administração.";
+		$this->load->view('Admin_Login', $data);
+	}
+
+
+	public function logout()
+	{
+		// desloga usuario
+		$this->session->unset_userdata("logged_user");
+		$data["msg"] = "Você foi desconectado.";
+		$this->load->view('Admin_Login', $data);
+	}
+
+	public function users()
+	{
+		// verifica se existe usuario logado
+		verifica_login();
+
+		// recupera lista de usuarios
+		$data["users"] = $this->Users_Model->getUsers();
+		$this->load->view('Admin_Users', $data);
+	}
+
+	public function user_disable()
+	{
+		// verifica se existe usuario logado
+		verifica_login();
+
+		// recuperando argumento da url
+		$id = $this->uri->segment(3);
+
+		// não desabilita o usuario 1
+		if ($id != 1) {
+			$this->Users_Model->disableUser($id);
+		} else {
+			// mostra pagina 404 se alguem tentar desativar usuario codigo 1
+			show_404();
+		}
+
+		redirect("admin/users", "refresh");
+	}
+
+	public function user_enable()
+	{
+		// verifica se existe usuario logado
+		verifica_login();
+
+		// recuperando argumento da url
+		$id = $this->uri->segment(3);
+
+		// ativa usuario do id informado
+		$this->Users_Model->enableUser($id);
+
+		redirect("admin/users", "refresh");
+	}
+
+	public function user_password()
+	{
+		// verifica se existe usuario logado
+		verifica_login();
+
+		// recuperando argumento da url
+		$id = $this->uri->segment(3);
+
+		// recuperando usuario
+		$data["user"] = $this->Users_Model->getUserById($id);
+
+		// mostra pagina 404 se alguem tentar alterar senha de usuario inexistente
+		if (!$data["user"]) show_404();
+
+		// valida formulario
+		$this->form_validation->set_rules('password', 'Senha', 'required|min_length[6]');
+		$this->form_validation->set_rules('password_repeat', 'Repita a Senha', 'required|min_length[6]|matches[password]');
+
+		if ($this->form_validation->run()) {
+			$password = $this->input->post('password');
+
+			$this->Users_Model->updatePassword($id, password_hash($password, PASSWORD_DEFAULT));
+
+			$data["msg"] = "Senha alterada com sucesso.";
+			$this->load->view('Admin_User_Password', $data);
+		} else {
+			// mostra formulario de login
+			$data["msg"] = validation_errors();
+			$this->load->view('Admin_User_Password', $data);
+		}
+	}
+
+	public function user_insert() {
+		// verifica se existe usuario logado
+		verifica_login();
+
+		// recuperando argumento da url
+		$id = $this->uri->segment(3);
+
+		// valida formulario
+		$this->form_validation->set_rules('username', 'Username', 'trim|alpha_dash|required|min_length[5]|max_length[20]');
+		$this->form_validation->set_rules('password', 'Senha', 'required|min_length[6]');
+		$this->form_validation->set_rules('password_repeat', 'Repita a Senha', 'required|min_length[6]|matches[password]');
+
+		// verifica validacao do formulario
+		if ($this->form_validation->run()) {
+			// pega os dados do formulario
+			$username = $this->input->post('username');
+			$password = $this->input->post('password');
+
+			// verifica se usuario ja existe
+			$usuario = $this->Users_Model->getUser($username);
+			if ($usuario) {
+				$data["msg"] = "Usuário já existe. Tente outro.";
+				$this->load->view('Admin_User_Insert', $data);
+			} else {
+				// insere usuario no banco de dados
+				$this->Users_Model->insertUser($username, password_hash($password, PASSWORD_DEFAULT));
+
+				redirect("admin/user_inserted", "refresh");
+			}
+		} else {
+			// mostra formulario de login
+			$data["msg"] = validation_errors();
+			$this->load->view('Admin_User_Insert', $data);
+		}
+
+
+	}
+
+	public function user_inserted() {
+		// verifica se existe usuario logado
+		verifica_login();
+
+		// recupera lista de usuarios
+		$data["users"] = $this->Users_Model->getUsers();
+
+		// mostra mensagem de usuario inserido
+		$data["msg"] = "Usuário inserido com sucesso.";
+		$this->load->view('Admin_Users', $data);
+	}
+
+}
