@@ -11,10 +11,10 @@ class Pedidos extends CI_Controller
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->library("form_validation");
-        $this->load->model('Produtos_Model');
-        $this->load->model('Pedidos_Model');
-        $this->load->model('Pedidos_Produtos_Model');
-        $this->load->model('Colaboradores_Model');
+        $this->load->model('Produtos_model');
+        $this->load->model('Pedidos_model');
+        $this->load->model('Pedidos_produtos_model');
+        $this->load->model('Colaboradores_model');
         $this->load->helper('funcoes');
     }
 
@@ -24,7 +24,7 @@ class Pedidos extends CI_Controller
         verifica_login();
 
         // pega os pedidos do banco de dados
-        $dados["pedidos"] = $this->Pedidos_Model->getPedidos();
+        $dados["pedidos"] = $this->Pedidos_model->getPedidos();
 
         // manda pra view
         $this->load->view('Pedidos', $dados);
@@ -40,7 +40,7 @@ class Pedidos extends CI_Controller
 
         // pega os pedidos do banco de dados
         if ($id) {
-            $dados["pedido"] = $this->Pedidos_Model->getPedido($id);
+            $dados["pedido"] = $this->Pedidos_model->getPedido($id);
 
             // caso nao encontre o pedido da erro 404
             if (!$dados["pedido"]) {
@@ -56,7 +56,7 @@ class Pedidos extends CI_Controller
         }
 
         // recuperando lista de colaboradores-fornecedores ativos
-        $dados["colaboradores"] = fornecedores_to_select($this->Colaboradores_Model->getFornecedoresAtivos());
+        $dados["colaboradores"] = fornecedores_to_select($this->Colaboradores_model->getFornecedoresAtivos());
 
         // validacao dos campos
         $this->form_validation->set_rules('colaboradores_id', 'Fornecedor', 'required');
@@ -80,13 +80,13 @@ class Pedidos extends CI_Controller
         // se for um novo pedido
         if (!$id) {
             // insere o pedido no banco de dados
-            $id = $this->Pedidos_Model->insert($dados_pedido);
+            $id = $this->Pedidos_model->insert($dados_pedido);
 
             // em caso de sucesso redireciona para a pagina de sucesso
             redirect('pedidos/insert_success', 'refresh');
         } else {
             // atualiza o pedido no banco de dados
-            $this->Pedidos_Model->update($id, $dados_pedido);
+            $this->Pedidos_model->update($id, $dados_pedido);
 
             // em caso de sucesso redireciona para a pagina de sucesso
             redirect('pedidos/update_success', 'refresh');
@@ -114,7 +114,7 @@ class Pedidos extends CI_Controller
         $dados['msg'] = "Pedido inserido com sucesso!";
 
         // pega os pedidos do banco de dados
-        $dados["pedidos"] = $this->Pedidos_Model->getPedidos();
+        $dados["pedidos"] = $this->Pedidos_model->getPedidos();
 
         // manda pra view
         $this->load->view('Pedidos', $dados);
@@ -129,7 +129,7 @@ class Pedidos extends CI_Controller
         $dados['msg'] = "Pedido atualizado com sucesso!";
 
         // pega os pedidos do banco de dados
-        $dados["pedidos"] = $this->Pedidos_Model->getPedidos();
+        $dados["pedidos"] = $this->Pedidos_model->getPedidos();
 
         // manda pra view
         $this->load->view('Pedidos', $dados);
@@ -144,7 +144,7 @@ class Pedidos extends CI_Controller
         $id = $this->uri->segment(3);
 
         // pega o pedido do banco de dados
-        $pedido = $this->Pedidos_Model->getPedido($id);
+        $pedido = $this->Pedidos_model->getPedido($id);
 
         // caso nao encontre o pedido da erro 404
         if (!$pedido) {
@@ -153,13 +153,13 @@ class Pedidos extends CI_Controller
         }
 
         // caso nao tenha produtos cadastrados no pedido nao pode finalizar
-        $pedidos_produtos = $this->Pedidos_Produtos_Model->getProdutos($id);
+        $pedidos_produtos = $this->Pedidos_produtos_model->getProdutos($id);
         if (!count($pedidos_produtos)) {
             // mensagem de erro
             $dados['msg'] = "Não é possível finalizar um pedido sem produtos!";
 
             // pega os pedidos do banco de dados
-            $dados["pedidos"] = $this->Pedidos_Model->getPedidos();
+            $dados["pedidos"] = $this->Pedidos_model->getPedidos();
 
             // manda pra view
             $this->load->view('Pedidos', $dados);
@@ -167,13 +167,13 @@ class Pedidos extends CI_Controller
         }
 
         // finaliza o pedido
-        $this->Pedidos_Model->finalizar($id);
+        $this->Pedidos_model->finalizar($id);
 
         // mensagem de sucesso
         $dados['msg'] = "Pedido finalizado com sucesso!";
 
         // pega os pedidos do banco de dados
-        $dados["pedidos"] = $this->Pedidos_Model->getPedidos();
+        $dados["pedidos"] = $this->Pedidos_model->getPedidos();
 
         // manda pra view
         $this->load->view('Pedidos', $dados);
@@ -189,7 +189,7 @@ class Pedidos extends CI_Controller
         $dados['id'] = $id;
 
         // pega o pedido do banco de dados
-        $dados["pedido"] = $this->Pedidos_Model->getPedido($id);
+        $dados["pedido"] = $this->Pedidos_model->getPedido($id);
 
         // caso nao encontre o pedido da erro 404
         if (!$dados["pedido"]) {
@@ -198,7 +198,7 @@ class Pedidos extends CI_Controller
         }
 
         // pega os produtos do pedido do banco de dados
-        $dados["pedidos_produtos"] = $this->Pedidos_Produtos_Model->getProdutos($id);
+        $dados["pedidos_produtos"] = $this->Pedidos_produtos_model->getProdutos($id);
 
         // manda pra view
         $this->load->view('Pedidos_View', $dados);

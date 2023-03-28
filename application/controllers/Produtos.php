@@ -11,7 +11,7 @@ class Produtos extends CI_Controller
 		$this->load->helper('url');
 		$this->load->helper('form');
 		$this->load->library("form_validation");
-		$this->load->model('Produtos_Model');
+		$this->load->model('Produtos_model');
 		$this->load->helper('funcoes');
 	}
 
@@ -20,7 +20,7 @@ class Produtos extends CI_Controller
         verifica_login();
 
         // pega os produtos do banco de dados
-        $dados["produtos"] = $this->Produtos_Model->getProdutos();
+        $dados["produtos"] = $this->Produtos_model->getProdutos();
         
         // manda pra view
         $this->load->view('Produtos', $dados);
@@ -33,7 +33,7 @@ class Produtos extends CI_Controller
         $dados['id'] = $id;
 
         if ($id) {
-            $dados['produto'] = $this->Produtos_Model->getProduto($id);
+            $dados['produto'] = $this->Produtos_model->getProduto($id);
 
 			// caso nao encontre o produto da erro 404
 			if (!$dados["produto"]) {
@@ -69,13 +69,13 @@ class Produtos extends CI_Controller
 
         // se for edicao, atualiza o registro
         if ($id) {
-            $this->Produtos_Model->update($id, $dados_produto);
+            $this->Produtos_model->update($id, $dados_produto);
 
 			// em caso de sucesso redireciona para a pagina de sucesso
 			redirect('produtos/update_success', 'refresh');
         } else {
 			// inserindo no banco de dados
-			if (!$this->Produtos_Model->insert($dados_produto)) {
+			if (!$this->Produtos_model->insert($dados_produto)) {
 				// caso ocorra algum erro
 				$dados['msg'] = "Erro inesperado ao cadastrar colaborador.";
 				$this->load->view('Produtos_Insert', $dados);
@@ -94,7 +94,7 @@ class Produtos extends CI_Controller
 		verifica_login();
 
 		// pega os dados dos colaboradores do banco de dados
-		$dados["produtos"] = $this->Produtos_Model->getProdutos();
+		$dados["produtos"] = $this->Produtos_model->getProdutos();
 
 		// informa que colaborador foi cadastrado com sucesso
 		$dados["msg"] = "Produto cadastrado com sucesso!";
@@ -121,7 +121,7 @@ class Produtos extends CI_Controller
         verifica_login();
 
         // pega os dados dos colaboradores do banco de dados
-        $dados["produtos"] = $this->Produtos_Model->getProdutos();
+        $dados["produtos"] = $this->Produtos_model->getProdutos();
 
         // informa que colaborador foi cadastrado com sucesso
         $dados["msg"] = "Produto atualizado com sucesso!";
@@ -137,7 +137,7 @@ class Produtos extends CI_Controller
         $id = $this->uri->segment(3);
 
         // ativa no banco de dados
-        $this->Produtos_Model->enable($id);
+        $this->Produtos_model->enable($id);
 
         // redireciona para a lista
         redirect('produtos', 'refresh');
@@ -151,7 +151,7 @@ class Produtos extends CI_Controller
         $id = $this->uri->segment(3);
 
         // desativa no banco de dados
-        $this->Produtos_Model->disable($id);
+        $this->Produtos_model->disable($id);
 
         // redireciona para a lista
         redirect('produtos', 'refresh');
@@ -165,7 +165,7 @@ class Produtos extends CI_Controller
         $id = $this->uri->segment(3);
 
         // pega os dados do produto
-        $dados["produto"] = $this->Produtos_Model->getProduto($id);
+        $dados["produto"] = $this->Produtos_model->getProduto($id);
 
         // caso nao encontre o produto da erro 404
         if (!$dados["produto"]) {

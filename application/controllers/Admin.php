@@ -11,7 +11,7 @@ class Admin extends CI_Controller
 		$this->load->helper('url');
 		$this->load->helper('form');
 		$this->load->library("form_validation");
-		$this->load->model('Users_Model');
+		$this->load->model('Users_model');
 		$this->load->helper('funcoes');
 	}
 
@@ -37,7 +37,7 @@ class Admin extends CI_Controller
 			$password = $this->input->post('password');
 
 			// recupera usuario do banco de dados
-			$usuario = $this->Users_Model->getUser($login);
+			$usuario = $this->Users_model->getUser($login);
 
 			// verifica se usuario existe e se a senha esta correta
 			if (!$usuario) {
@@ -85,7 +85,7 @@ class Admin extends CI_Controller
 		verifica_login();
 
 		// recupera lista de usuarios
-		$data["users"] = $this->Users_Model->getUsers();
+		$data["users"] = $this->Users_model->getUsers();
 		$this->load->view('Admin_Users', $data);
 	}
 
@@ -99,7 +99,7 @@ class Admin extends CI_Controller
 
 		// não desabilita o usuario 1
 		if ($id != 1) {
-			$this->Users_Model->disableUser($id);
+			$this->Users_model->disableUser($id);
 		} else {
 			// mostra pagina 404 se alguem tentar desativar usuario codigo 1
 			show_404();
@@ -117,7 +117,7 @@ class Admin extends CI_Controller
 		$id = $this->uri->segment(3);
 
 		// ativa usuario do id informado
-		$this->Users_Model->enableUser($id);
+		$this->Users_model->enableUser($id);
 
 		redirect("admin/users", "refresh");
 	}
@@ -131,7 +131,7 @@ class Admin extends CI_Controller
 		$id = $this->uri->segment(3);
 
 		// recuperando usuario
-		$data["user"] = $this->Users_Model->getUserById($id);
+		$data["user"] = $this->Users_model->getUserById($id);
 
 		// mostra pagina 404 se alguem tentar alterar senha de usuario inexistente
 		if (!$data["user"]) show_404();
@@ -143,7 +143,7 @@ class Admin extends CI_Controller
 		if ($this->form_validation->run()) {
 			$password = $this->input->post('password');
 
-			$this->Users_Model->updatePassword($id, password_hash($password, PASSWORD_DEFAULT));
+			$this->Users_model->updatePassword($id, password_hash($password, PASSWORD_DEFAULT));
 
 			$data["msg"] = "Senha alterada com sucesso.";
 			$this->load->view('Admin_User_Password', $data);
@@ -173,13 +173,13 @@ class Admin extends CI_Controller
 			$password = $this->input->post('password');
 
 			// verifica se usuario ja existe
-			$usuario = $this->Users_Model->getUser($username);
+			$usuario = $this->Users_model->getUser($username);
 			if ($usuario) {
 				$data["msg"] = "Usuário já existe. Tente outro.";
 				$this->load->view('Admin_User_Insert', $data);
 			} else {
 				// insere usuario no banco de dados
-				$this->Users_Model->insertUser($username, password_hash($password, PASSWORD_DEFAULT));
+				$this->Users_model->insertUser($username, password_hash($password, PASSWORD_DEFAULT));
 
 				redirect("admin/user_inserted", "refresh");
 			}
@@ -197,7 +197,7 @@ class Admin extends CI_Controller
 		verifica_login();
 
 		// recupera lista de usuarios
-		$data["users"] = $this->Users_Model->getUsers();
+		$data["users"] = $this->Users_model->getUsers();
 
 		// mostra mensagem de usuario inserido
 		$data["msg"] = "Usuário inserido com sucesso.";

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Pedido_Produtos extends CI_Controller
+class Pedido_produtos extends CI_Controller
 {
 
     function __construct()
@@ -11,10 +11,10 @@ class Pedido_Produtos extends CI_Controller
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->library("form_validation");
-        $this->load->model('Produtos_Model');
-        $this->load->model('Pedidos_Model');
-        // $this->load->model('Colaboradores_Model');
-        $this->load->model('Pedidos_Produtos_Model');
+        $this->load->model('Produtos_model');
+        $this->load->model('Pedidos_model');
+        // $this->load->model('Colaboradores_model');
+        $this->load->model('Pedidos_produtos_model');
         $this->load->helper('funcoes');
     }
 
@@ -28,9 +28,9 @@ class Pedido_Produtos extends CI_Controller
         $dados["id"] = $id;
 
         // recupera o pedido do banco de dados
-        $dados["pedido"] = $this->Pedidos_Model->getPedido($id);
+        $dados["pedido"] = $this->Pedidos_model->getPedido($id);
 
-        $dados["produtos"] = produtos_to_select($this->Produtos_Model->getProdutosAtivos());
+        $dados["produtos"] = produtos_to_select($this->Produtos_model->getProdutosAtivos());
 
         // verifica o retorno
         if (!$dados["pedido"]) {
@@ -55,7 +55,7 @@ class Pedido_Produtos extends CI_Controller
             $dados['msg'] = validation_errors();
 
             // recupera os produtos do pedido
-            $dados["pedidos_produtos"] = $this->Pedidos_Produtos_Model->getProdutos($id);
+            $dados["pedidos_produtos"] = $this->Pedidos_produtos_model->getProdutos($id);
 
             $this->load->view('Pedido_Produtos', $dados);
             return;
@@ -73,11 +73,11 @@ class Pedido_Produtos extends CI_Controller
             $dados_pedidos_produtos['quantidade'] &&
             $dados_pedidos_produtos['preco']) {
             // insere no banco de dados
-            $this->Pedidos_Produtos_Model->insert($dados_pedidos_produtos);
+            $this->Pedidos_produtos_model->insert($dados_pedidos_produtos);
         }
 
         // recupera os produtos do pedido
-        $dados["pedidos_produtos"] = $this->Pedidos_Produtos_Model->getProdutos($id);
+        $dados["pedidos_produtos"] = $this->Pedidos_produtos_model->getProdutos($id);
 
         // manda pra view
         $this->load->view('Pedido_Produtos', $dados);
@@ -91,7 +91,7 @@ class Pedido_Produtos extends CI_Controller
         $id = $this->uri->segment(3);
 
         // recupera o pedido do banco de dados
-        $pedidos_id = $this->Pedidos_Produtos_Model->getPedidosIdByPedidosProdutosId($id);
+        $pedidos_id = $this->Pedidos_produtos_model->getPedidosIdByPedidosProdutosId($id);
 
         // se nao encontrou nao existe registro a ser deletado
         if (!$pedidos_id) {
@@ -100,10 +100,10 @@ class Pedido_Produtos extends CI_Controller
         }
 
         // exclui o registro do banco de dados
-        $this->Pedidos_Produtos_Model->delete($id);
+        $this->Pedidos_produtos_model->delete($id);
 
         // redireciona para a listagem
-        redirect('Pedido_Produtos/abrir/' . $pedidos_id);
+        redirect('pedido_produtos/abrir/' . $pedidos_id);
     }
     
 }

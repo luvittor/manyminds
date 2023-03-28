@@ -11,8 +11,8 @@ class Colaboradores extends CI_Controller
 		$this->load->helper('url');
 		$this->load->helper('form');
 		$this->load->library("form_validation");
-		$this->load->model('Colaboradores_Model');
-		$this->load->model('Users_Model');
+		$this->load->model('Colaboradores_model');
+		$this->load->model('Users_model');
 		$this->load->helper('funcoes');
 	}
 
@@ -22,7 +22,7 @@ class Colaboradores extends CI_Controller
 		verifica_login();
 
 		// pega os dados dos colaboradores do banco de dados
-		$dados["colaboradores"] = $this->Colaboradores_Model->getColaboradores();
+		$dados["colaboradores"] = $this->Colaboradores_model->getColaboradores();
 		// manda pra view
 		$this->load->view('Colaboradores', $dados);
 	}
@@ -38,7 +38,7 @@ class Colaboradores extends CI_Controller
 
 		// se for edicao, pega os dados do colaborador
 		if ($id) {
-			$dados["colaborador"] = $this->Colaboradores_Model->getColaborador($id);
+			$dados["colaborador"] = $this->Colaboradores_model->getColaborador($id);
 			$dados["id"] = $id;
 
 			// caso nao encontre o colaborador da erro 404
@@ -58,7 +58,7 @@ class Colaboradores extends CI_Controller
 		}
 
 		// recuperando usuarios para mostrar no formulario
-		$dados['users'] = users_to_select($this->Users_Model->getUsers());
+		$dados['users'] = users_to_select($this->Users_model->getUsers());
 
 		// regras de validacao
 		$this->form_validation->set_rules('nome', 'Nome', 'required|trim|min_length[3]|max_length[100]');
@@ -88,7 +88,7 @@ class Colaboradores extends CI_Controller
 
 		// validar se o usuario ja nao esta com outro colaborador
 		if ($users_id) {
-			$colaborador = $this->Colaboradores_Model->getColaboradorByUsersId($users_id);
+			$colaborador = $this->Colaboradores_model->getColaboradorByUsersId($users_id);
 			if ($colaborador) {
 				// so da erro se o colaborador for diferente do que esta sendo editado (se for edicao)
 				if ($colaborador->id != $id) {
@@ -129,13 +129,13 @@ class Colaboradores extends CI_Controller
 		// atualizando ou inserindo no banco de dados
 		if ($id) {
 			// atualizando no banco de dados
-			$this->Colaboradores_Model->update($id, $dados_colaborador);
+			$this->Colaboradores_model->update($id, $dados_colaborador);
 
 			// em caso de sucesso redireciona para a pagina de sucesso
 			redirect('colaboradores/update_success', 'refresh');
 		} else {
 			// inserindo no banco de dados
-			if (!$this->Colaboradores_Model->insert($dados_colaborador)) {
+			if (!$this->Colaboradores_model->insert($dados_colaborador)) {
 				// caso ocorra algum erro
 				$dados['msg'] = "Erro inesperado ao cadastrar colaborador.";
 				$this->load->view('Colaboradores_Insert', $dados);
@@ -154,7 +154,7 @@ class Colaboradores extends CI_Controller
 		verifica_login();
 
 		// pega os dados dos colaboradores do banco de dados
-		$dados["colaboradores"] = $this->Colaboradores_Model->getColaboradores();
+		$dados["colaboradores"] = $this->Colaboradores_model->getColaboradores();
 
 		// informa que colaborador foi cadastrado com sucesso
 		$dados["msg"] = "Colaborador cadastrado com sucesso!";
@@ -179,7 +179,7 @@ class Colaboradores extends CI_Controller
 		verifica_login();
 
 		// pega os dados dos colaboradores do banco de dados
-		$dados["colaboradores"] = $this->Colaboradores_Model->getColaboradores();
+		$dados["colaboradores"] = $this->Colaboradores_model->getColaboradores();
 
 		// informa que colaborador foi cadastrado com sucesso
 		$dados["msg"] = "Colaborador atualizado com sucesso!";
@@ -195,7 +195,7 @@ class Colaboradores extends CI_Controller
 		$id = $this->uri->segment(3);
 
 		// ativa colaborador
-		$this->Colaboradores_Model->enable($id);
+		$this->Colaboradores_model->enable($id);
 
 		// redireciona para lista
 		redirect('colaboradores', 'refresh');
@@ -209,7 +209,7 @@ class Colaboradores extends CI_Controller
 		$id = $this->uri->segment(3);
 
 		// ativa colaborador
-		$this->Colaboradores_Model->disable($id);
+		$this->Colaboradores_model->disable($id);
 
 		// redireciona para lista
 		redirect('colaboradores', 'refresh');
@@ -223,11 +223,11 @@ class Colaboradores extends CI_Controller
 		$id = $this->uri->segment(3);
 
 		// pega os dados do colaborador
-		$dados['colaborador'] = $this->Colaboradores_Model->getColaborador($id);
+		$dados['colaborador'] = $this->Colaboradores_model->getColaborador($id);
 		$dados['colaborador']->data_contratacao = date_mysql_to_br($dados['colaborador']->data_contratacao);
 
 		// pega os dados do usuario
-		$dados['usuario'] = $this->Users_Model->getUserById($dados['colaborador']->users_id);
+		$dados['usuario'] = $this->Users_model->getUserById($dados['colaborador']->users_id);
 		if (@$dados['usuario']->username) {
 			$dados['username'] = $dados['usuario']->username;
 		} else {
