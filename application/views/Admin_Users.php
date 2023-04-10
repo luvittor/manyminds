@@ -32,7 +32,7 @@ $this->load->view('Admin__Header');
             echo "<td>" . $user->username . "</td>";
 
             if ($user->id == 1) {
-                echo "<td><a href='" . base_url("admin/user_password/" . $user->id) . "'>Alterar Senha</a></td>";
+                echo "<td></td>";
                 echo "<td></td>";
             } else {
                 if ($user->disable) {

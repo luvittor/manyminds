@@ -84,8 +84,13 @@ class Admin extends CI_Controller
 		// verifica se existe usuario logado
 		verifica_login();
 
+		// admin não pode ser modificado
+		$data["msg"] = 'Usuário "admin" não pode ser modificado.';
+
 		// recupera lista de usuarios
 		$data["users"] = $this->Users_model->getUsers();
+
+		// mostra pagina de usuarios
 		$this->load->view('Admin_Users', $data);
 	}
 
@@ -129,6 +134,9 @@ class Admin extends CI_Controller
 
 		// recuperando argumento da url
 		$id = $this->uri->segment(3);
+
+		// se for id 1, mostra pagina 404
+		if ($id == 1) show_404();
 
 		// recuperando usuario
 		$data["user"] = $this->Users_model->getUserById($id);
