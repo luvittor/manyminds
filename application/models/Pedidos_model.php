@@ -29,6 +29,27 @@ class Pedidos_model extends CI_Model
         return $query->row();
     }
 
+    public function getPedidosFinalizados()
+    {
+        $this->db->select('pedidos.*, colaboradores.nome as fornecedor');
+        $this->db->from('pedidos');
+        $this->db->join('colaboradores', 'colaboradores.id = pedidos.colaboradores_id');
+        $this->db->where('pedidos.finalizado', 1);
+        $this->db->order_by('pedidos.id', 'DESC');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function getPedidosPendentes() {
+        $this->db->select('pedidos.*, colaboradores.nome as fornecedor');
+        $this->db->from('pedidos');
+        $this->db->join('colaboradores', 'colaboradores.id = pedidos.colaboradores_id');
+        $this->db->where('pedidos.finalizado', 0);
+        $this->db->order_by('pedidos.id', 'DESC');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function insert($dados)
     {
         $this->db->insert('pedidos', $dados);
