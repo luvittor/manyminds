@@ -44,8 +44,8 @@
 				"method": "GET",
 				"header": [
 					{
-						"key": "Authorization",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODE1MDQxMTR9.8BvlAYXt_QKZaBWk2v27Z9x0Bls0c2IAegUruFSePC0"
+						"key": "jwt-authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODE1NzgwNzl9.m1LALRzTQdyeu0z44RafYlaPFltB-bUbVKQe3HXqKbc"
 					}
 				],
 				"url": {
@@ -67,8 +67,8 @@
 				"method": "GET",
 				"header": [
 					{
-						"key": "Authorization",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODE1MDU2NzF9.ZsyOrC9dUsEjHHtwc6lEnDf-iEQcW1TiADsumM131IE"
+						"key": "jwt-authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODE1NzgwNzl9.m1LALRzTQdyeu0z44RafYlaPFltB-bUbVKQe3HXqKbc"
 					}
 				],
 				"url": {
@@ -90,8 +90,8 @@
 				"method": "GET",
 				"header": [
 					{
-						"key": "Authorization",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODE1MTYzNTJ9.AgoKlf0wk6xSOM8w13iSO6fbfTrwBMi85yo5tsSX1hc"
+						"key": "jwt-authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODE1NzgwNzl9.m1LALRzTQdyeu0z44RafYlaPFltB-bUbVKQe3HXqKbc"
 					}
 				],
 				"url": {
@@ -113,8 +113,8 @@
 				"method": "GET",
 				"header": [
 					{
-						"key": "Authorization",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODE1MDQ4NjV9.2no2kmPbL4iTUD_PF6x5ahGZ5RJ3sNHu1FOpqL9deXQ"
+						"key": "jwt-authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODE1NzgwNzl9.m1LALRzTQdyeu0z44RafYlaPFltB-bUbVKQe3HXqKbc"
 					}
 				],
 				"url": {
@@ -137,8 +137,8 @@
 				"method": "GET",
 				"header": [
 					{
-						"key": "Authorization",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODE1MDU2NzF9.ZsyOrC9dUsEjHHtwc6lEnDf-iEQcW1TiADsumM131IE"
+						"key": "jwt-authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODE1NzgwNzl9.m1LALRzTQdyeu0z44RafYlaPFltB-bUbVKQe3HXqKbc"
 					}
 				],
 				"url": {
@@ -161,8 +161,8 @@
 				"method": "POST",
 				"header": [
 					{
-						"key": "Authorization",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODE1MTU3MTd9.QCbdCCwLYj2aaBUcca7tJ15UJO-Oh4GSQLIvtxW-uyg"
+						"key": "jwt-authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODE1NzgwNzl9.m1LALRzTQdyeu0z44RafYlaPFltB-bUbVKQe3HXqKbc"
 					}
 				],
 				"body": {
@@ -170,7 +170,7 @@
 					"formdata": [
 						{
 							"key": "colaboradores_id",
-							"value": "12",
+							"value": "8",
 							"type": "default"
 						},
 						{
