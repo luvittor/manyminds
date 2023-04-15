@@ -48,7 +48,7 @@ class Pedidos extends CI_Controller
                 show_404();
             }
 
-            // caso esteja desabilitado da erro 404
+            // caso esteja finalizado da erro 404
             if ($dados["pedido"]->finalizado == 1) {
                 // erro 404
                 show_404();
