@@ -42,7 +42,7 @@ Usando o verbo POST é possível usar o “form_validation” do próprio CodeIg
 
 ## Referências
 
-Para criar a API REST por cima do CodeIgniter 3 estes 2 repositórios foram minhas referências:
+Para criar a API REST com autenticação JWT por cima do CodeIgniter 3 estes 2 repositórios foram minhas referências:
 
 - https://github.com/Virtuallified/REST-Api_JWT_CodeIgniter3
 - https://github.com/chriskacerguis/codeigniter-restserver
