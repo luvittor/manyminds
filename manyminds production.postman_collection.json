@@ -1,0 +1,225 @@
+{
+	"info": {
+		"_postman_id": "1f54633d-786e-4b1d-81d6-610a77451fac",
+		"name": "manyminds production",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "{{url}}/user/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/user/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/pedidos/finalizados",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "jwt-authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODE1Nzg5MDN9.JIm_g6JNqiDQ2Vll28NH5dLeLt7mJEyvQYPz9fE4OVM"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/pedidos/finalizados",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"pedidos",
+						"finalizados"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/pedidos/pendentes",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "jwt-authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODE1Nzg5MDN9.JIm_g6JNqiDQ2Vll28NH5dLeLt7mJEyvQYPz9fE4OVM"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/pedidos/pendentes",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"pedidos",
+						"pendentes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/colaboradores/fornecedores_ativos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "jwt-authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODE1Nzg5MDN9.JIm_g6JNqiDQ2Vll28NH5dLeLt7mJEyvQYPz9fE4OVM"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/colaboradores/fornecedores_ativos",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"colaboradores",
+						"fornecedores_ativos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/pedidos/produtos/1000",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "jwt-authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODE1Nzg5MDN9.JIm_g6JNqiDQ2Vll28NH5dLeLt7mJEyvQYPz9fE4OVM"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/pedidos/produtos/1000",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"pedidos",
+						"produtos",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/pedidos/finalizar/1000",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "jwt-authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODE1Nzg5MDN9.JIm_g6JNqiDQ2Vll28NH5dLeLt7mJEyvQYPz9fE4OVM"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/pedidos/finalizar/1000",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"pedidos",
+						"finalizar",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/pedidos/editar/1000",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "jwt-authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODE1Nzg5MDN9.JIm_g6JNqiDQ2Vll28NH5dLeLt7mJEyvQYPz9fE4OVM"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "colaboradores_id",
+							"value": "8",
+							"type": "default"
+						},
+						{
+							"key": "observacao",
+							"value": "text text",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/pedidos/editar/1005",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"pedidos",
+						"editar",
+						"1005"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://vittoretti.com/portfolio/manyminds/api/",
+			"type": "string"
+		}
+	]
+}
