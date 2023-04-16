@@ -11,6 +11,7 @@ Algumas funções do sistema estão disponíveis via API REST.
 https://vittoretti.com/portfolio/manyminds/
 
 usuário: admin
+
 senha: 123456
 
 ## Testar a API REST online
@@ -38,3 +39,10 @@ Usando o verbo POST é possível usar o “form_validation” do próprio CodeIg
   - usuário: admin
   - senha: 123456
 - use o arquivo do postman na base do projeto para testar a API REST.
+
+## Referências
+
+Para criar a API REST por cima do CodeIgniter 3 estes 2 repositórios foram minhas referências:
+
+- https://github.com/Virtuallified/REST-Api_JWT_CodeIgniter3
+- https://github.com/chriskacerguis/codeigniter-restserver
