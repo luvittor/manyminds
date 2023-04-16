@@ -97,16 +97,14 @@ class Pedidos extends REST_Controller
         check_authorization();
 
         // validacao dos campos
-        $this->form_validation->set_rules('colaboradores_id', 'colaboradores_id', 'required');
-        $this->form_validation->set_rules('observacao', 'observacao', 'trim|max_length[500]');
+        $this->form_validation->set_rules('colaboradores_id', 'colaborador', 'required');
+        $this->form_validation->set_rules('observacao', 'observação', 'trim|max_length[500]');
 
         if (!$this->form_validation->run()) {
-            $validation_errors = format_validation_errors_for_api(validation_errors());
-            
             $this->response([
                 'status' => FALSE,
                 'message' => 'Erro de validação dos dados.',
-                'validation_errors' => $validation_errors
+                'errors' => $this->form_validation->error_array()
             ], REST_Controller::HTTP_BAD_REQUEST);
         }
 

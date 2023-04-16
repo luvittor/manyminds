@@ -10,7 +10,7 @@ function check_authorization() {
     if (empty($headers['Jwt-Authorization'])) {
         $ci->response([
             'status' => FALSE,
-            'message' => 'Token de autorização não está presente no header da requisição (jwt-authorization).'
+            'message' => 'Token de autorização não está presente no header da requisição (Jwt-Authorization).'
         ], REST_Controller::HTTP_UNAUTHORIZED);
     }
 
@@ -33,10 +33,4 @@ function check_authorization() {
             'message' => 'Usuário desabilitado. Contate administrador.'
         ], REST_Controller::HTTP_UNAUTHORIZED);
     }
-}
-
-function format_validation_errors_for_api($validation_errors) {
-    $validation_errors = explode("\n", strip_tags(validation_errors()));
-    $validation_errors = array_filter($validation_errors);
-    return $validation_errors;
 }
