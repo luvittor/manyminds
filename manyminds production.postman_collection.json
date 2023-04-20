@@ -45,7 +45,7 @@
 				"header": [
 					{
 						"key": "Jwt-Authorization",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODE2NjI5MDB9.DLgzVR_XCUUqRkrwjEDGDTue3NCTA-rMK_bnjt8F5To"
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODIwMTAyODd9.ofR2NBOvy2gI4SzB4a1T6h6px4o-Hep6hnNDmi_8m0Q"
 					}
 				],
 				"url": {
@@ -218,7 +218,7 @@
 	"variable": [
 		{
 			"key": "url",
-			"value": "https://vittoretti.com/portfolio/manyminds/api/",
+			"value": "https://vittoretti.com/portfolio/projects/manyminds/api/",
 			"type": "string"
 		}
 	]

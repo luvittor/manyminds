@@ -8,7 +8,7 @@ Algumas funções do sistema estão disponíveis via API REST.
 
 ## Testar o site online
 
-https://vittoretti.com/portfolio/manyminds/
+https://vittoretti.com/portfolio/projects/manyminds/
 
 usuário: admin
 
