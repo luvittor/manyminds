@@ -93,6 +93,12 @@ class Pedidos extends REST_Controller
         ], REST_Controller::HTTP_OK);
     }
 
+
+    /**
+     * PHP não suporta recuperar os parametros pelo verbo PUT.
+     * Consequentemente o form_validation do CodeIgniter também não funciona com verbo PUT.
+     * Por isso esse método de editar_post foi criado usando o verbo POST.
+     */
     public function editar_post($id) {
         check_authorization();
 
