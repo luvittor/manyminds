@@ -28,39 +28,47 @@ class Admin extends CI_Controller
 		$data["msg"] = "";
 
 		// validacao de formulario
-		$this->form_validation->set_rules('login', 'Login', 'trim|required|min_length[5]|max_length[10]');
+		$this->form_validation->set_rules('username', 'Nome de usuário', 'trim|required|min_length[5]|max_length[10]');
 		$this->form_validation->set_rules('password', 'Senha', 'required|min_length[6]');
 
-		if ($this->form_validation->run()) {
-			// pega os dados do formulario
-			$login = $this->input->post('login');
-			$password = $this->input->post('password');
-
-			// recupera usuario do banco de dados
-			$usuario = $this->Users_model->getUser($login);
-
-			// verifica se usuario existe e se a senha esta correta
-			if (!$usuario) {
-				$data["msg"] = "Login ou Senha Inválidos. Tente Novamente. (2)";
-				$this->load->view('Admin_Login', $data);
-			} elseif (!password_verify($password, $usuario->password)) {
-				// acima verificou se a senha esta correta
-				$data["msg"] = "Login ou Senha Inválidos. Tente Novamente. (1)";
-				$this->load->view('Admin_Login', $data);
-			} elseif ($usuario->disable) {
-				// acima verificou se o usuario esta desabilitado
-				$data["msg"] = "Usuário desabilitado. Contate o administrador.";
-				$this->load->view('Admin_Login', $data);
-			} else {
-				// cria sessao com o usuario logado
-				$this->session->userdata["logged_user"] = $usuario;
-				redirect("admin", "refresh");
-			}
-		} else {
+		if (!$this->form_validation->run()) {
 			// mostra formulario de login
 			$data["msg"] = validation_errors();
 			$this->load->view('Admin_Login', $data);
+			return;
 		}
+
+		// pega os dados do formulario
+		$username = $this->input->post('username');
+		$password = $this->input->post('password');
+
+		// recupera usuario do banco de dados
+		$user = $this->Users_model->getUser($username);
+
+		// verifica se usuario existe e se a senha esta correta
+		if (empty($user)) {
+			$data["msg"] = "Login ou Senha Inválidos. Tente Novamente. (2)";
+			$this->load->view('Admin_Login', $data);
+			return;
+		}
+		
+		// verifica se a senha esta correta
+		if (!password_verify($password, $user->password)) {
+			$data["msg"] = "Login ou Senha Inválidos. Tente Novamente. (1)";
+			$this->load->view('Admin_Login', $data);
+			return;
+		} 
+		
+		// verifica se o usuario esta desabilitado
+		if ($user->disable) {
+			$data["msg"] = "Usuário desabilitado. Contate o administrador.";
+			$this->load->view('Admin_Login', $data);
+			return;
+		}
+
+		// cria sessao com o usuario logado
+		$this->session->userdata["logged_user"] = $user;
+		redirect("admin", "refresh");
 	}
 
 	public function logged_out()

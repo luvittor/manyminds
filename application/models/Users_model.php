@@ -9,9 +9,9 @@ class Users_model extends CI_Model
         parent::__construct();
     }
 
-    public function getUser($login)
+    public function getUser($username)
     {
-        $this->db->where('username', $login);
+        $this->db->where('username', $username);
         $query = $this->db->get('users');
 
         return $query->row();

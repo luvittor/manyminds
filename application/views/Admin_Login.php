@@ -27,8 +27,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 if ($msg) echo "<div class='msg-box'>" . $msg . "</div>";
 
                 echo form_open("admin/login");
-                echo form_label("Login:", "login");
-                echo form_input('login', set_value('login'), array('autofocus' => 'autofocus'));
+                echo form_label("Nome de usuário:", "username");
+                echo form_input('username', set_value('username'), array('autofocus' => 'autofocus'));
                 echo form_label("Senha:", "password");
                 echo form_password('password');
                 echo form_submit("enviar", "Login", array("class" => "btn btn-info"));
