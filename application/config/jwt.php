@@ -34,6 +34,7 @@ $config['token_header'] = 'Jwt-Authorization';
 |--------------------------------------------------------------------------
 | ( 1 Day ) : 60 * 60 * 24 = 86400
 | ( 1 Hour ) : 60 * 60     = 3600
+| ( 10 Minutes ) : 60 * 10 = 600
 | ( 1 Minute ) : 60        = 60
 */
-$config['token_expire_time'] = 600;
+$config['token_expire_time'] = 86400;
