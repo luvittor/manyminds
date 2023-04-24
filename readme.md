@@ -16,11 +16,11 @@ senha: 123456
 
 ## Testar a API REST online
 
-Importe no Postman app esse [arquivo](https://vittoretti.com/portfolio/download.php?file=manyminds-production-postman) para testar a API REST.
+Importe esse [arquivo](https://vittoretti.com/portfolio/download.php?file=manyminds-production-postman) no Postman app para testar a API REST.
 
-**Aviso sobre a API**
+### Aviso sobre a API
 
-O PHP não recupera parâmetros de verbos diferentes de GET e POST, então o verbo POST foi usado no lugar de verbos PUT e DELETE.
+O PHP não recupera parâmetros de verbos diferentes de GET e POST, então o verbo POST foi usado no lugar dos verbos PUT e DELETE.
 
 Usando o verbo POST é possível usar o “form_validation” do próprio CodeIgniter 3, poupando muitas linhas de código e podendo reutilizar o mesmo sistema de validação de formulário do site.
 
