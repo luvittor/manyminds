@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1f54633d-786e-4b1d-81d6-610a77451fac",
+		"_postman_id": "2061b86e-6097-4532-8cf7-de3519781b5e",
 		"name": "manyminds production",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -39,13 +39,36 @@
 			"response": []
 		},
 		{
+			"name": "{{url}}/colaboradores/fornecedores_ativos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Jwt-Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODIzNjM1MDh9.79tnxSZD8DunNJ_H_c5sW26ZGp7sYpsJzmnKmNeKkSQ"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/colaboradores/fornecedores_ativos",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"colaboradores",
+						"fornecedores_ativos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "{{url}}/pedidos/finalizados",
 			"request": {
 				"method": "GET",
 				"header": [
 					{
 						"key": "Jwt-Authorization",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODIwMTAyODd9.ofR2NBOvy2gI4SzB4a1T6h6px4o-Hep6hnNDmi_8m0Q"
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODIzNjM1MDh9.79tnxSZD8DunNJ_H_c5sW26ZGp7sYpsJzmnKmNeKkSQ"
 					}
 				],
 				"url": {
@@ -68,7 +91,7 @@
 				"header": [
 					{
 						"key": "Jwt-Authorization",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODE2NjI5MDB9.DLgzVR_XCUUqRkrwjEDGDTue3NCTA-rMK_bnjt8F5To"
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODIzNjM1MDh9.79tnxSZD8DunNJ_H_c5sW26ZGp7sYpsJzmnKmNeKkSQ"
 					}
 				],
 				"url": {
@@ -85,71 +108,24 @@
 			"response": []
 		},
 		{
-			"name": "{{url}}/colaboradores/fornecedores_ativos",
+			"name": "{{url}}/pedidos/exibir/1000",
 			"request": {
 				"method": "GET",
 				"header": [
 					{
 						"key": "Jwt-Authorization",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODE2NjI5MDB9.DLgzVR_XCUUqRkrwjEDGDTue3NCTA-rMK_bnjt8F5To"
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODIzNjM1MDh9.79tnxSZD8DunNJ_H_c5sW26ZGp7sYpsJzmnKmNeKkSQ"
 					}
 				],
 				"url": {
-					"raw": "{{url}}/colaboradores/fornecedores_ativos",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"colaboradores",
-						"fornecedores_ativos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "{{url}}/pedidos/produtos/1000",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Jwt-Authorization",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODE2NjI5MDB9.DLgzVR_XCUUqRkrwjEDGDTue3NCTA-rMK_bnjt8F5To"
-					}
-				],
-				"url": {
-					"raw": "{{url}}/pedidos/produtos/1000",
+					"raw": "{{url}}/pedidos/exibir/1005",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"pedidos",
-						"produtos",
-						"1000"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "{{url}}/pedidos/finalizar/1000",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Jwt-Authorization",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODE2NjI5MDB9.DLgzVR_XCUUqRkrwjEDGDTue3NCTA-rMK_bnjt8F5To"
-					}
-				],
-				"url": {
-					"raw": "{{url}}/pedidos/finalizar/1008",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"pedidos",
-						"finalizar",
-						"1008"
+						"exibir",
+						"1005"
 					]
 				}
 			},
@@ -162,7 +138,7 @@
 				"header": [
 					{
 						"key": "Jwt-Authorization",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODE2NjEyNzN9.xBcowiERy53o6DrSg3IY1mupWyIWuYCrQXyMz0Abtas"
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODIzNjM1MDh9.79tnxSZD8DunNJ_H_c5sW26ZGp7sYpsJzmnKmNeKkSQ"
 					}
 				],
 				"body": {
@@ -181,14 +157,163 @@
 					]
 				},
 				"url": {
-					"raw": "{{url}}/pedidos/editar/1008",
+					"raw": "{{url}}/pedidos/editar/1005",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"pedidos",
 						"editar",
-						"1008"
+						"1005"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/pedidos/finalizar/1000",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Jwt-Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODIzNjM1MDh9.79tnxSZD8DunNJ_H_c5sW26ZGp7sYpsJzmnKmNeKkSQ"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/pedidos/finalizar/1007",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"pedidos",
+						"finalizar",
+						"1007"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/pedido_produtos/listar/1000",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Jwt-Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODIzNjM1MDh9.79tnxSZD8DunNJ_H_c5sW26ZGp7sYpsJzmnKmNeKkSQ"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/pedido_produtos/listar/1005",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"pedido_produtos",
+						"listar",
+						"1005"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/pedido_produtos/adicionar/1000",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Jwt-Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODIzNjM1MDh9.79tnxSZD8DunNJ_H_c5sW26ZGp7sYpsJzmnKmNeKkSQ"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "produtos_id",
+							"value": "5",
+							"type": "default"
+						},
+						{
+							"key": "quantidade",
+							"value": "10",
+							"type": "default"
+						},
+						{
+							"key": "preco",
+							"value": "2.99",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/pedido_produtos/adicionar/1005",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"pedido_produtos",
+						"adicionar",
+						"1005"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/pedido_produtos/remover/1000",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Jwt-Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODIzNjM1MDh9.79tnxSZD8DunNJ_H_c5sW26ZGp7sYpsJzmnKmNeKkSQ"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "pedido_produtos_id",
+							"value": "35",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/pedido_produtos/remover/1007",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"pedido_produtos",
+						"remover",
+						"1007"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/produtos/listar",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Jwt-Authorization",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODIzNjM1MDh9.79tnxSZD8DunNJ_H_c5sW26ZGp7sYpsJzmnKmNeKkSQ"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/produtos/listar",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"produtos",
+						"listar"
 					]
 				}
 			},

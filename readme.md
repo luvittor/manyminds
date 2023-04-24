@@ -20,7 +20,7 @@ Importe no Postman app esse [arquivo](https://vittoretti.com/portfolio/download.
 
 **Aviso sobre a API**
 
-O PHP não recupera parâmetros de verbos diferentes de GET e POST, então o verbo POST foi usado no lugar de verbo PUT.
+O PHP não recupera parâmetros de verbos diferentes de GET e POST, então o verbo POST foi usado no lugar de verbos PUT e DELETE.
 
 Usando o verbo POST é possível usar o “form_validation” do próprio CodeIgniter 3, poupando muitas linhas de código e podendo reutilizar o mesmo sistema de validação de formulário do site.
 

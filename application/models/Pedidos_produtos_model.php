@@ -31,7 +31,7 @@ class Pedidos_produtos_model extends CI_Model
         $this->db->from('pedidos_produtos');
         $this->db->where('id', $id);
         $query = $this->db->get();
-        return $query->row()->pedidos_id;
+        return @$query->row()->pedidos_id;
     }
 
     public function delete($id) {

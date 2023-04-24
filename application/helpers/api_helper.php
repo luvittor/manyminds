@@ -34,3 +34,30 @@ function check_authorization() {
         ], REST_Controller::HTTP_UNAUTHORIZED);
     }
 }
+
+
+function check_pedido($id, $verifica_finalizado = TRUE) {
+    $ci = &get_instance();
+
+    // verifica se o pedido existe
+    $pedido = $ci->Pedidos_model->getPedido($id);
+    if (empty($pedido)) {
+        $ci->response([
+            'status' => FALSE,
+            'message' => 'Pedido não encontrado.'
+        ], REST_Controller::HTTP_NOT_FOUND);
+    }
+
+    // verifica se o pedido ja foi finalizado   
+    if ($verifica_finalizado) {
+        if ($pedido->finalizado) {
+            $ci->response([
+                'status' => FALSE,
+                'message' => 'Pedido já finalizado.'
+            ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+    }
+
+    return $pedido;
+
+}

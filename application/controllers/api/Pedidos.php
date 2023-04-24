@@ -42,47 +42,10 @@ class Pedidos extends REST_Controller
         ], REST_Controller::HTTP_OK);
     }
 
-
-    public function produtos_get($id) {
-        check_authorization();
-
-        $produtos = $this->Pedidos_produtos_model->getProdutos($id);
-
-        // verifica se o pedido existe
-        $pedido = $this->Pedidos_model->getPedido($id);
-        if (empty($pedido)) {
-            $this->response([
-                'status' => FALSE,
-                'message' => 'Pedido não encontrado.'
-            ], REST_Controller::HTTP_NOT_FOUND);
-        }
-
-        $this->response([
-            'status' => TRUE,
-            'produtos' => $produtos
-        ], REST_Controller::HTTP_OK);
-    }
-
-
     public function finalizar_get($id) {
         check_authorization();
 
-        // verifica se o pedido existe
-        $pedido = $this->Pedidos_model->getPedido($id);
-        if (empty($pedido)) {
-            $this->response([
-                'status' => FALSE,
-                'message' => 'Pedido não encontrado.'
-            ], REST_Controller::HTTP_NOT_FOUND);
-        }
-
-        // verifica se o pedido ja foi finalizado
-        if ($pedido->finalizado) {
-            $this->response([
-                'status' => FALSE,
-                'message' => 'Pedido já finalizado.'
-            ], REST_Controller::HTTP_BAD_REQUEST);
-        }
+        check_pedido($id);
 
         // finaliza o pedido
         $this->Pedidos_model->finalizar($id);
@@ -102,6 +65,8 @@ class Pedidos extends REST_Controller
     public function editar_post($id) {
         check_authorization();
 
+        check_pedido($id);
+
         // validacao dos campos
         $this->form_validation->set_rules('colaboradores_id', 'colaborador', 'required');
         $this->form_validation->set_rules('observacao', 'observação', 'trim|max_length[500]');
@@ -114,26 +79,8 @@ class Pedidos extends REST_Controller
             ], REST_Controller::HTTP_BAD_REQUEST);
         }
 
-        // verifica se o pedido existe
-        $pedido = $this->Pedidos_model->getPedido($id);
-        if (empty($pedido)) {
-            $this->response([
-                'status' => FALSE,
-                'message' => 'Pedido não encontrado.'
-            ], REST_Controller::HTTP_NOT_FOUND);
-        }
-
-        // verifica se o pedido ja foi finalizado
-        if ($pedido->finalizado) {
-            $this->response([
-                'status' => FALSE,
-                'message' => 'Pedido já finalizado.'
-            ], REST_Controller::HTTP_BAD_REQUEST);
-        }
-
-        // verificando se colaborador é válido como fornecedor
+        // verificando se colaborador existe
         $colaborador = $this->Colaboradores_model->getColaborador($this->post('colaboradores_id'));
-
         if (empty($colaborador)) {
             $this->response([
                 'status' => FALSE,
@@ -141,10 +88,19 @@ class Pedidos extends REST_Controller
             ], REST_Controller::HTTP_NOT_FOUND);
         }
 
+        // verifica se colaborador é um fornecedor
         if ($colaborador->fornecedor == 0) {
             $this->response([
                 'status' => FALSE,
                 'message' => 'Colaborador não é um fornecedor. Pesquise lista de fornecedores.'
+            ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+
+        // verifica se colaborador está ativo
+        if ($colaborador->disable) {
+            $this->response([
+                'status' => FALSE,
+                'message' => 'Colaborador está desativado.'
             ], REST_Controller::HTTP_BAD_REQUEST);
         }
 
@@ -161,6 +117,21 @@ class Pedidos extends REST_Controller
         $this->response([
             'status' => TRUE,
             'message' => 'Pedido atualizado com sucesso.'
+        ], REST_Controller::HTTP_OK);
+    }
+
+    public function exibir_get($id) {
+        check_authorization();
+
+        $pedido = check_pedido($id, false);
+
+        // recuperando produtos do pedido
+        $produtos = $this->Pedidos_produtos_model->getProdutos($id);
+
+        $this->response([
+            'status' => TRUE,
+            'pedido' => $pedido,
+            'pedido_produtos' => $produtos
         ], REST_Controller::HTTP_OK);
     }
 
