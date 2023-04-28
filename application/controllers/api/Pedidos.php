@@ -59,14 +59,15 @@ class Pedidos extends REST_Controller
             ], $pedidos_helper->http_code);
         }
 
-        // finaliza o pedido
-        $this->Pedidos_model->finalizar($id);
+        // verifica e finaliza se puder
+        $pedidos_helper->finalizar($id);
 
+        // retorna resultado
         $this->response([
-            'status' => TRUE,
-            'message' => 'Pedido finalizado com sucesso.',
-            'errors' => []
-        ], REST_Controller::HTTP_OK);
+            'status' => $pedidos_helper->status,
+            'message' => $pedidos_helper->message,
+            'errors' => $pedidos_helper->errors
+        ], $pedidos_helper->http_code);
     }
 
 

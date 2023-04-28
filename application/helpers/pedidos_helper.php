@@ -116,6 +116,32 @@ class Pedidos_helper
 
     }
 
+    function finalizar($id) {
+
+        $ci = &get_instance();
+
+        // caso nao tenha produtos cadastrados no pedido nao pode finalizar
+        $pedidos_produtos = $ci->Pedidos_produtos_model->getProdutos($id);
+        if (!count($pedidos_produtos)) {
+            $this->status = false;
+            $this->message = 'Erro de validação dos dados.';
+            $this->errors = ['pedido_produtos' => 'Não é possível finalizar um pedido sem produtos.'];
+            $this->http_code = REST_Controller::HTTP_BAD_REQUEST;
+            return false;
+        }
+
+        // finaliza o pedido
+        $ci->Pedidos_model->finalizar($id);
+
+        // retorna sucesso
+        $this->status = true;
+        $this->message = 'Pedido finalizado com sucesso.';
+        $this->errors = [];
+        $this->http_code = REST_Controller::HTTP_OK;
+        return true;
+    }
+
+
     function getErrorsAsHTMLString() {
         $html = '';
         foreach ($this->errors as $value) {

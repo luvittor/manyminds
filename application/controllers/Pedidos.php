@@ -126,43 +126,37 @@ class Pedidos extends CI_Controller
 
     public function finalizar()
     {
+        $dados = [];
+        
         // verifica se existe usuario logado
         verifica_login();
 
         // pega o id do pedido
         $id = $this->uri->segment(3);
 
-        // pega o pedido do banco de dados
-        $pedido = $this->Pedidos_model->getPedido($id);
+        // verifica se pedido existe
+        $pedidos_helper = new Pedidos_helper();
+        $pedidos_helper->verifica_pedido($id, false);
 
-        // caso nao encontre o pedido da erro 404
-        if (!$pedido) {
-            // erro 404
+        if ($pedidos_helper->status == false) {
             show_404();
         }
 
-        // caso nao tenha produtos cadastrados no pedido nao pode finalizar
-        $pedidos_produtos = $this->Pedidos_produtos_model->getProdutos($id);
-        if (!count($pedidos_produtos)) {
-            // mensagem de erro
-            $dados['msg'] = "Não é possível finalizar um pedido sem produtos!";
+        // verifica se pode finalizar e finaliza
+        $pedidos_helper->finalizar($id);
 
-            // pega os pedidos do banco de dados
-            $dados["pedidos"] = $this->Pedidos_model->getPedidos();
+        // pega a lista de pedidos do banco de dados
+        $dados["pedidos"] = $this->Pedidos_model->getPedidos();
 
-            // manda pra view
+        if ($pedidos_helper->status == false) {
+            $dados['msg'] = $pedidos_helper->getErrorsAsHTMLString();
+
             $this->load->view('Pedidos', $dados);
             return;
         }
 
-        // finaliza o pedido
-        $this->Pedidos_model->finalizar($id);
-
         // mensagem de sucesso
-        $dados['msg'] = "Pedido finalizado com sucesso!";
-
-        // pega os pedidos do banco de dados
-        $dados["pedidos"] = $this->Pedidos_model->getPedidos();
+        $dados['msg'] = $pedidos_helper->message;
 
         // manda pra view
         $this->load->view('Pedidos', $dados);
