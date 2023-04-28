@@ -108,24 +108,38 @@
 			"response": []
 		},
 		{
-			"name": "{{url}}/pedidos/exibir/1000",
+			"name": "{{url}}/pedidos/adicionar",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Jwt-Authorization",
 						"value": "{{token}}"
 					}
 				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "colaboradores_id",
+							"value": "11",
+							"type": "default"
+						},
+						{
+							"key": "observacao",
+							"value": "text text text text text text text",
+							"type": "default"
+						}
+					]
+				},
 				"url": {
-					"raw": "{{url}}/pedidos/exibir/1000",
+					"raw": "{{url}}/pedidos/adicionar",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"pedidos",
-						"exibir",
-						"1000"
+						"adicionar"
 					]
 				}
 			},
@@ -157,14 +171,38 @@
 					]
 				},
 				"url": {
-					"raw": "{{url}}/pedidos/editar/1000",
+					"raw": "{{url}}/pedidos/editar/1010",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"pedidos",
 						"editar",
-						"1000"
+						"1010"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/pedidos/exibir/1000",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Jwt-Authorization",
+						"value": "{{token}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/pedidos/exibir/1011",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"pedidos",
+						"exibir",
+						"1011"
 					]
 				}
 			},
@@ -181,14 +219,14 @@
 					}
 				],
 				"url": {
-					"raw": "{{url}}/pedidos/finalizar/1007",
+					"raw": "{{url}}/pedidos/finalizar/1010",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"pedidos",
 						"finalizar",
-						"1007"
+						"1010"
 					]
 				}
 			},
