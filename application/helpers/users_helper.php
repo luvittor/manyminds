@@ -1,9 +1,13 @@
 <?php
 
+require_once(APPPATH . '/helpers/controller.php');
+require_once(APPPATH . '/libraries/REST_Controller.php');
 
-class Users_helper
+use Restserver\Libraries\REST_Controller;
+
+class Users_helper extends Controller
 {
-
+    
     public $user = null;
 
     public function auth()
@@ -16,7 +20,12 @@ class Users_helper
         $ci->form_validation->set_rules('password', 'Senha', 'required|min_length[6]');
 
         if (!$ci->form_validation->run()) {
-            return ["Não foi possível logar. Verifique usuário e senha. (1)"];
+            $this->status = false;
+            $this->message = "Não foi possível logar.";
+            $this->errors = ["Erro ao logar. Verifique usuário e senha. (1)"];
+            $this->data = [];
+            $this->http_code = REST_Controller::HTTP_UNAUTHORIZED;
+            return false;
         }
 
         // pega os dados do formulario
@@ -28,24 +37,41 @@ class Users_helper
 
         // verifica se usuario existe e se a senha esta correta
         if (empty($this->user)) {
-            return ["Login ou Senha Inválidos. Tente Novamente. (2)"];
+            $this->status = false;
+            $this->message = "Não foi possível logar.";
+            $this->errors = ["Erro ao logar. Verifique usuário e senha. (2)"];
+            $this->data = [];
+            $this->http_code = REST_Controller::HTTP_UNAUTHORIZED;
+            return false;
         }
 
         // verifica se a senha esta correta
         if (!password_verify($password, $this->user->password)) {
-            return ["Login ou Senha Inválidos. Tente Novamente. (1)"];
+            $this->status = false;
+            $this->message = "Não foi possível logar.";
+            $this->errors = ["Erro ao logar. Verifique usuário e senha. (3)"];
+            $this->data = [];
+            $this->http_code = REST_Controller::HTTP_UNAUTHORIZED;
+            return false;
         }
 
         // verifica se o usuario esta desabilitado
         if ($this->user->disable) {
-            return ["Usuário desabilitado. Contate o administrador."];
+            $this->status = false;
+            $this->message = "Não foi possível logar.";
+            $this->errors = ["Usuário desabilitado. Contate o administrador."];
+            $this->data = [];
+            $this->http_code = REST_Controller::HTTP_UNAUTHORIZED;
+            return false;
         }
 
-        return array();
+        $this->status = true;
+        $this->message = "Login realizado com sucesso.";
+        $this->errors = [];
+        $this->data = [];
+        $this->http_code = REST_Controller::HTTP_OK;
+        return true;
+
     }
 
-    public function getUser()
-    {
-        return $this->user;
-    }
 }

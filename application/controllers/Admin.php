@@ -27,17 +27,16 @@ class Admin extends CI_Controller
 	public function login()
 	{
 		$users_helper = new Users_helper();
-		$errors = $users_helper->auth();
+		$users_helper->auth();
 
-		if (!empty($errors)) {
-			$data["msg"] = implode("<br>", $errors);
+		if ($users_helper->status == false) {
+			$data["msg"] = $users_helper->getErrorsAsHTMLString();
 			$this->load->view('Admin_Login', $data);
 			return;
 		}
 
 		// cria sessao com o usuario logado
-		$user = $users_helper->getUser();
-		$this->session->userdata["logged_user"] = $user;
+		$this->session->userdata["logged_user"] = $users_helper->user;
 		redirect("admin", "refresh");
 	}
 

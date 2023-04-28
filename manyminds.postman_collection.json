@@ -219,14 +219,14 @@
 					}
 				],
 				"url": {
-					"raw": "{{url}}/pedidos/finalizar/1006",
+					"raw": "{{url}}/pedidos/finalizar/1014",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"pedidos",
 						"finalizar",
-						"1006"
+						"1014"
 					]
 				}
 			},
@@ -381,12 +381,12 @@
 	"variable": [
 		{
 			"key": "url",
-			"value": "localhost/dev/php-codeigniter3/manyminds/api/",
+			"value": "http://localhost/dev/php-codeigniter3/manyminds/api/",
 			"type": "string"
 		},
 		{
 			"key": "token",
-			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODI2OTIyMDd9.drBbllJMyDgdaQ3sk_jSHIkrGAQWSuGH_LfqpqfQczw",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODI3MTQ3OTZ9.ENlB7aAxw3NpWDYpqXbBPhfvdC73M_PLzj3qblf_I5E",
 			"type": "default"
 		}
 	]

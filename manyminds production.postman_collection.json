@@ -127,7 +127,7 @@
 						},
 						{
 							"key": "observacao",
-							"value": "text text text text text text text",
+							"value": "text text text text text",
 							"type": "default"
 						}
 					]
@@ -195,14 +195,14 @@
 					}
 				],
 				"url": {
-					"raw": "{{url}}/pedidos/exibir/1011",
+					"raw": "{{url}}/pedidos/exibir/1012",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"pedidos",
 						"exibir",
-						"1011"
+						"1012"
 					]
 				}
 			},
@@ -386,7 +386,7 @@
 		},
 		{
 			"key": "token",
-			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODI3MDY5OTV9.2Eb1L-WCCzKoTpxUU3f2uwzuzZUnykxlCTuvDARuFn8",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODI3MTU0MzZ9.4jzTGEsBzWL6N1-uMCjPJ00D5TfbRr07d5LVzurWd14",
 			"type": "default"
 		}
 	]

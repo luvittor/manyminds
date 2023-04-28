@@ -21,31 +21,33 @@ class User extends REST_Controller
 	public function login_post()
 	{
 		$users_helper = new Users_helper();
-		$errors = $users_helper->auth();
+		$users_helper->auth();
 
-		if (!empty($errors)) {
-			// login failed
+		// falha no login
+		if ($users_helper->status == false) {
 			$this->response([
 				'status' => FALSE,
-				'message' => 'Não foi possível logar.',
-				'errors' => $errors
-			], REST_Controller::HTTP_UNAUTHORIZED);		
+				'message' => $users_helper->message,
+				'errors' => $users_helper->errors,
+				'data' => $users_helper->data
+			], $users_helper->http_code);
 		}
 
-		// recuperando usuario logado
-		$user = $users_helper->getUser();
-
 		// criando token de autorização
-		$token_data['id'] = $user->id;
-		$token_data['username'] = $user->username;
+		$token_data['id'] = $users_helper->user->id;
+		$token_data['username'] = $users_helper->user->username;
 		$tokenData = $this->authorization_token->generateToken($token_data);
 
-		// retornando dados
-		$data = array();
-		$data["status"] = TRUE;
-		$data['message'] = 'Login realizado com sucesso!';
-		$data['access_token'] = $tokenData;
+		// retornando token
+		$data = $users_helper->data;
+		$data['token'] = $tokenData;
 
-		$this->response($data, REST_Controller::HTTP_OK);
+		// respondendo requisicao com sucesso
+		$this->response([
+			'status' => true,
+			'message' => $users_helper->message,
+			'errors' => $users_helper->errors,
+			'data' => $data
+		], $users_helper->http_code);
 	}
 }

@@ -1,17 +1,12 @@
 <?php
 
+require_once(APPPATH . '/helpers/controller.php');
 require_once(APPPATH . '/libraries/REST_Controller.php');
 
 use Restserver\Libraries\REST_Controller;
 
-class Pedidos_helper
+class Pedidos_helper extends Controller
 {
-
-    public $status = null;
-    public $message = null;
-    public $errors = [];
-    public $data = [];
-    public $http_code = null;
     public $pedido = null;
 
     function verifica_pedido($id, $verifica_finalizado)
@@ -122,10 +117,10 @@ class Pedidos_helper
             $this->http_code = REST_Controller::HTTP_CREATED;
             return true;
         }
-
     }
 
-    function finalizar($id) {
+    function finalizar($id)
+    {
 
         $ci = &get_instance();
 
@@ -151,14 +146,4 @@ class Pedidos_helper
         $this->http_code = REST_Controller::HTTP_OK;
         return true;
     }
-
-
-    function getErrorsAsHTMLString() {
-        $html = '';
-        foreach ($this->errors as $value) {
-            $html .= '<p>' . $value . '</p>';
-        }
-        return $html;
-    }
-
 }
