@@ -13,6 +13,7 @@ class Admin extends CI_Controller
 		$this->load->library("form_validation");
 		$this->load->model('Users_model');
 		$this->load->helper('funcoes');
+		$this->load->helper('Users_helper');
 	}
 
 	public function index()
@@ -25,48 +26,17 @@ class Admin extends CI_Controller
 
 	public function login()
 	{
-		$data["msg"] = "";
+		$users_helper = new Users_helper();
+		$errors = $users_helper->auth();
 
-		// validacao de formulario
-		$this->form_validation->set_rules('username', 'Nome de usuário', 'trim|required|min_length[5]|max_length[10]');
-		$this->form_validation->set_rules('password', 'Senha', 'required|min_length[6]');
-
-		if (!$this->form_validation->run()) {
-			// mostra formulario de login
-			$data["msg"] = validation_errors();
-			$this->load->view('Admin_Login', $data);
-			return;
-		}
-
-		// pega os dados do formulario
-		$username = $this->input->post('username');
-		$password = $this->input->post('password');
-
-		// recupera usuario do banco de dados
-		$user = $this->Users_model->getUser($username);
-
-		// verifica se usuario existe e se a senha esta correta
-		if (empty($user)) {
-			$data["msg"] = "Login ou Senha Inválidos. Tente Novamente. (2)";
-			$this->load->view('Admin_Login', $data);
-			return;
-		}
-		
-		// verifica se a senha esta correta
-		if (!password_verify($password, $user->password)) {
-			$data["msg"] = "Login ou Senha Inválidos. Tente Novamente. (1)";
-			$this->load->view('Admin_Login', $data);
-			return;
-		} 
-		
-		// verifica se o usuario esta desabilitado
-		if ($user->disable) {
-			$data["msg"] = "Usuário desabilitado. Contate o administrador.";
+		if (!empty($errors)) {
+			$data["msg"] = implode("<br>", $errors);
 			$this->load->view('Admin_Login', $data);
 			return;
 		}
 
 		// cria sessao com o usuario logado
+		$user = $users_helper->getUser();
 		$this->session->userdata["logged_user"] = $user;
 		redirect("admin", "refresh");
 	}
