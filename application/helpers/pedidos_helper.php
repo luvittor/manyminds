@@ -10,6 +10,7 @@ class Pedidos_helper
     public $status = null;
     public $message = null;
     public $errors = [];
+    public $data = [];
     public $http_code = null;
     public $pedido = null;
 
@@ -23,6 +24,7 @@ class Pedidos_helper
             $this->status = false;
             $this->message = 'Erro de validação dos dados.';
             $this->errors = ['not_found' => 'Pedido não encontrado.'];
+            $this->data = [];
             $this->http_code = REST_Controller::HTTP_NOT_FOUND;
             return false;
         }
@@ -33,6 +35,7 @@ class Pedidos_helper
                 $this->status = false;
                 $this->message = 'Erro de validação dos dados.';
                 $this->errors = ['finalizado' => 'Pedido já finalizado.'];
+                $this->data = [];
                 $this->http_code = REST_Controller::HTTP_BAD_REQUEST;
                 return false;
             }
@@ -54,6 +57,7 @@ class Pedidos_helper
             $this->status = false;
             $this->message = 'Erro de validação dos dados.';
             $this->errors = $ci->form_validation->error_array();
+            $this->data = [];
             $this->http_code = REST_Controller::HTTP_BAD_REQUEST;
             return false;
         }
@@ -64,6 +68,7 @@ class Pedidos_helper
             $this->status = false;
             $this->message = 'Erro de validação de dados.';
             $this->errors = ['colaboradores_id' => 'Colaborador não encontrado.'];
+            $this->data = [];
             $this->http_code = REST_Controller::HTTP_BAD_REQUEST;
             return false;
         }
@@ -73,6 +78,7 @@ class Pedidos_helper
             $this->status = false;
             $this->message = 'Erro de validação de dados.';
             $this->errors = ['colaboradores_id' => 'Colaborador não é um fornecedor.'];
+            $this->data = [];
             $this->http_code = REST_Controller::HTTP_BAD_REQUEST;
             return false;
         }
@@ -82,6 +88,7 @@ class Pedidos_helper
             $this->status = false;
             $this->message = 'Erro de validação de dados.';
             $this->errors = ['colaboradores_id' => 'Colaborador está desativado.'];
+            $this->data = [];
             $this->http_code = REST_Controller::HTTP_BAD_REQUEST;
             return false;
         }
@@ -100,16 +107,18 @@ class Pedidos_helper
             $this->status = true;
             $this->message = 'Pedido atualizado com sucesso.';
             $this->errors = [];
+            $this->data = [];
             $this->http_code = REST_Controller::HTTP_OK;
             return true;
         } else {
             // insere o pedido no banco de dados
-            $ci->Pedidos_model->insert($data);
+            $id = $ci->Pedidos_model->insert($data);
 
             // retorna sucesso
             $this->status = true;
             $this->message = 'Pedido inserido com sucesso.';
             $this->errors = [];
+            $this->data = ['pedidos_id' => $id];
             $this->http_code = REST_Controller::HTTP_CREATED;
             return true;
         }
@@ -126,6 +135,7 @@ class Pedidos_helper
             $this->status = false;
             $this->message = 'Erro de validação dos dados.';
             $this->errors = ['pedido_produtos' => 'Não é possível finalizar um pedido sem produtos.'];
+            $this->data = [];
             $this->http_code = REST_Controller::HTTP_BAD_REQUEST;
             return false;
         }
@@ -137,6 +147,7 @@ class Pedidos_helper
         $this->status = true;
         $this->message = 'Pedido finalizado com sucesso.';
         $this->errors = [];
+        $this->data = [];
         $this->http_code = REST_Controller::HTTP_OK;
         return true;
     }

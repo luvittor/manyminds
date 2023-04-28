@@ -70,6 +70,23 @@ class Pedidos extends REST_Controller
         ], $pedidos_helper->http_code);
     }
 
+    public function adicionar_post() {
+        check_authorization();
+
+        // valida e adiciona se sucesso
+        $pedidos_helper = new Pedidos_helper();
+        $pedidos_helper->atualizar();
+
+        // retorna resultado de adicao de pedido
+        $this->response([
+            'status' => $pedidos_helper->status,
+            'message' => $pedidos_helper->message,
+            'errors' => $pedidos_helper->errors,
+            'data' => $pedidos_helper->data
+        ], $pedidos_helper->http_code);
+    }
+
+
 
     /**
      * PHP não suporta recuperar os parametros pelo verbo PUT.
