@@ -45,7 +45,7 @@
 				"header": [
 					{
 						"key": "Jwt-Authorization",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODIzNjM1MDh9.79tnxSZD8DunNJ_H_c5sW26ZGp7sYpsJzmnKmNeKkSQ"
+						"value": "{{token}}"
 					}
 				],
 				"url": {
@@ -68,7 +68,7 @@
 				"header": [
 					{
 						"key": "Jwt-Authorization",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODIzNjM1MDh9.79tnxSZD8DunNJ_H_c5sW26ZGp7sYpsJzmnKmNeKkSQ"
+						"value": "{{token}}"
 					}
 				],
 				"url": {
@@ -91,7 +91,7 @@
 				"header": [
 					{
 						"key": "Jwt-Authorization",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODIzNjM1MDh9.79tnxSZD8DunNJ_H_c5sW26ZGp7sYpsJzmnKmNeKkSQ"
+						"value": "{{token}}"
 					}
 				],
 				"url": {
@@ -114,18 +114,18 @@
 				"header": [
 					{
 						"key": "Jwt-Authorization",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODIzNjM1MDh9.79tnxSZD8DunNJ_H_c5sW26ZGp7sYpsJzmnKmNeKkSQ"
+						"value": "{{token}}"
 					}
 				],
 				"url": {
-					"raw": "{{url}}/pedidos/exibir/1005",
+					"raw": "{{url}}/pedidos/exibir/1000",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"pedidos",
 						"exibir",
-						"1005"
+						"1000"
 					]
 				}
 			},
@@ -138,7 +138,7 @@
 				"header": [
 					{
 						"key": "Jwt-Authorization",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODIzNjM1MDh9.79tnxSZD8DunNJ_H_c5sW26ZGp7sYpsJzmnKmNeKkSQ"
+						"value": "{{token}}"
 					}
 				],
 				"body": {
@@ -157,14 +157,14 @@
 					]
 				},
 				"url": {
-					"raw": "{{url}}/pedidos/editar/1005",
+					"raw": "{{url}}/pedidos/editar/1000",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"pedidos",
 						"editar",
-						"1005"
+						"1000"
 					]
 				}
 			},
@@ -177,7 +177,7 @@
 				"header": [
 					{
 						"key": "Jwt-Authorization",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODIzNjM1MDh9.79tnxSZD8DunNJ_H_c5sW26ZGp7sYpsJzmnKmNeKkSQ"
+						"value": "{{token}}"
 					}
 				],
 				"url": {
@@ -201,7 +201,7 @@
 				"header": [
 					{
 						"key": "Jwt-Authorization",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODIzNjM1MDh9.79tnxSZD8DunNJ_H_c5sW26ZGp7sYpsJzmnKmNeKkSQ"
+						"value": "{{token}}"
 					}
 				],
 				"url": {
@@ -225,7 +225,7 @@
 				"header": [
 					{
 						"key": "Jwt-Authorization",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODIzNjM1MDh9.79tnxSZD8DunNJ_H_c5sW26ZGp7sYpsJzmnKmNeKkSQ"
+						"value": "{{token}}"
 					}
 				],
 				"body": {
@@ -233,17 +233,17 @@
 					"formdata": [
 						{
 							"key": "produtos_id",
-							"value": "5",
+							"value": "6",
 							"type": "default"
 						},
 						{
 							"key": "quantidade",
-							"value": "10",
+							"value": "1",
 							"type": "default"
 						},
 						{
 							"key": "preco",
-							"value": "2.99",
+							"value": "199.99",
 							"type": "default"
 						}
 					]
@@ -269,7 +269,7 @@
 				"header": [
 					{
 						"key": "Jwt-Authorization",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODIzNjM1MDh9.79tnxSZD8DunNJ_H_c5sW26ZGp7sYpsJzmnKmNeKkSQ"
+						"value": "{{token}}"
 					}
 				],
 				"body": {
@@ -277,20 +277,20 @@
 					"formdata": [
 						{
 							"key": "pedido_produtos_id",
-							"value": "35",
+							"value": "39",
 							"type": "default"
 						}
 					]
 				},
 				"url": {
-					"raw": "{{url}}/pedido_produtos/remover/1007",
+					"raw": "{{url}}/pedido_produtos/remover/1005",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"pedido_produtos",
 						"remover",
-						"1007"
+						"1005"
 					]
 				}
 			},
@@ -303,7 +303,7 @@
 				"header": [
 					{
 						"key": "Jwt-Authorization",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODIzNjM1MDh9.79tnxSZD8DunNJ_H_c5sW26ZGp7sYpsJzmnKmNeKkSQ"
+						"value": "{{token}}"
 					}
 				],
 				"url": {
@@ -345,6 +345,11 @@
 			"key": "url",
 			"value": "https://vittoretti.com/portfolio/projects/manyminds/api/",
 			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODI3MDY5OTV9.2Eb1L-WCCzKoTpxUU3f2uwzuzZUnykxlCTuvDARuFn8",
+			"type": "default"
 		}
 	]
 }
