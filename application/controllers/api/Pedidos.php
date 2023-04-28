@@ -17,6 +17,7 @@ class Pedidos extends REST_Controller
         $this->load->model('Colaboradores_model');
         $this->load->helper('api_helper');
         $this->load->library("form_validation");
+        $this->load->helper('Pedidos_helper');
 	}
 
     public function finalizados_get()
@@ -45,14 +46,26 @@ class Pedidos extends REST_Controller
     public function finalizar_get($id) {
         check_authorization();
 
-        check_pedido($id);
+        // verifica se pedido existe e foi finalizado
+        $pedidos_helper = new Pedidos_helper();
+        $pedidos_helper->verifica_pedido($id, true);
+
+        // em caso de erro na verificação do pedido
+        if ($pedidos_helper->status == false) {
+            $this->response([
+                'status' => $pedidos_helper->status,
+                'message' => $pedidos_helper->message,
+                'errors' => $pedidos_helper->errors
+            ], $pedidos_helper->http_code);
+        }
 
         // finaliza o pedido
         $this->Pedidos_model->finalizar($id);
 
         $this->response([
             'status' => TRUE,
-            'message' => 'Pedido finalizado com sucesso.'
+            'message' => 'Pedido finalizado com sucesso.',
+            'errors' => []
         ], REST_Controller::HTTP_OK);
     }
 
@@ -65,68 +78,51 @@ class Pedidos extends REST_Controller
     public function editar_post($id) {
         check_authorization();
 
-        check_pedido($id);
+        // verifica se pedido existe e foi finalizado
+        $pedidos_helper = new Pedidos_helper();
+        $pedidos_helper->verifica_pedido($id, true);
 
-        // validacao dos campos
-        $this->form_validation->set_rules('colaboradores_id', 'colaborador', 'required');
-        $this->form_validation->set_rules('observacao', 'observação', 'trim|max_length[500]');
-
-        if (!$this->form_validation->run()) {
+        // em caso de erro na verificação do pedido
+        if ($pedidos_helper->status == false) {
             $this->response([
-                'status' => FALSE,
-                'message' => 'Erro de validação dos dados.',
-                'errors' => $this->form_validation->error_array()
-            ], REST_Controller::HTTP_BAD_REQUEST);
+                'status' => $pedidos_helper->status,
+                'message' => $pedidos_helper->message,
+                'errors' => $pedidos_helper->errors
+            ], $pedidos_helper->http_code);
         }
 
-        // verificando se colaborador existe
-        $colaborador = $this->Colaboradores_model->getColaborador($this->post('colaboradores_id'));
-        if (empty($colaborador)) {
-            $this->response([
-                'status' => FALSE,
-                'message' => 'Colaborador não encontrado.'
-            ], REST_Controller::HTTP_NOT_FOUND);
-        }
+        // valida e edita se sucesso
+        $pedidos_helper->atualizar($id);
 
-        // verifica se colaborador é um fornecedor
-        if ($colaborador->fornecedor == 0) {
-            $this->response([
-                'status' => FALSE,
-                'message' => 'Colaborador não é um fornecedor. Pesquise lista de fornecedores.'
-            ], REST_Controller::HTTP_BAD_REQUEST);
-        }
-
-        // verifica se colaborador está ativo
-        if ($colaborador->disable) {
-            $this->response([
-                'status' => FALSE,
-                'message' => 'Colaborador está desativado.'
-            ], REST_Controller::HTTP_BAD_REQUEST);
-        }
-
-        // recuperando dados postados
-        $data = [
-            'colaboradores_id' => $this->post('colaboradores_id'),
-            'observacao' => $this->post('observacao')
-        ];
-
-        // atualiza o pedido
-        $this->Pedidos_model->update($id, $data);
-
-        // retorno que o pedido foi atualizado
+        // retorna resultado de edicao de pedido
         $this->response([
-            'status' => TRUE,
-            'message' => 'Pedido atualizado com sucesso.'
-        ], REST_Controller::HTTP_OK);
+            'status' => $pedidos_helper->status,
+            'message' => $pedidos_helper->message,
+            'errors' => $pedidos_helper->errors
+        ], $pedidos_helper->http_code);
     }
 
     public function exibir_get($id) {
         check_authorization();
 
-        $pedido = check_pedido($id, false);
+        // verifica se pedido existe e foi finalizado
+        $pedidos_helper = new Pedidos_helper();
+        $pedidos_helper->verifica_pedido($id, false);
+
+        // em caso de erro na verificação do pedido
+        if ($pedidos_helper->status == false) {
+            $this->response([
+                'status' => $pedidos_helper->status,
+                'message' => $pedidos_helper->message,
+                'errors' => $pedidos_helper->errors
+            ], $pedidos_helper->http_code);
+        }
 
         // recuperando produtos do pedido
         $produtos = $this->Pedidos_produtos_model->getProdutos($id);
+
+        // recuperando pedido
+        $pedido = $pedidos_helper->pedido;
 
         $this->response([
             'status' => TRUE,

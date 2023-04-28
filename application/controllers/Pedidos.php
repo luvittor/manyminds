@@ -16,6 +16,7 @@ class Pedidos extends CI_Controller
         $this->load->model('Pedidos_produtos_model');
         $this->load->model('Colaboradores_model');
         $this->load->helper('funcoes');
+        $this->load->helper('Pedidos_helper');
     }
 
     public function index()
@@ -30,79 +31,67 @@ class Pedidos extends CI_Controller
         $this->load->view('Pedidos', $dados);
     }
 
-    public function insert($id = false)
+    public function insert()
     {
+        $dados = [];
+        
         // verifica se existe usuario logado
         verifica_login();
 
-        $dados["id"] = $id;
-        $dados["pedido"] = false;
+        // recuperando lista de colaboradores-fornecedores ativos
+        $dados["colaboradores"] = fornecedores_to_select($this->Colaboradores_model->getFornecedoresAtivos());
 
-        // pega os pedidos do banco de dados
-        if ($id) {
-            $dados["pedido"] = $this->Pedidos_model->getPedido($id);
+        // valida e inseri pedido se sucesso
+        $pedidos_helper = new Pedidos_helper();
+        $pedidos_helper->atualizar();
 
-            // caso nao encontre o pedido da erro 404
-            if (!$dados["pedido"]) {
-                // erro 404
-                show_404();
-            }
+        // em caso de erros ao inserir
+        if ($pedidos_helper->status == false) {
+            $dados['msg'] = $pedidos_helper->getErrorsAsHTMLString();
+            $this->load->view('Pedidos_Insert', $dados);
+            return;
+        }
 
-            // caso esteja finalizado da erro 404
-            if ($dados["pedido"]->finalizado == 1) {
-                // erro 404
-                show_404();
-            }
+        // em caso de sucesso redireciona para a pagina de sucesso
+        redirect('pedidos/insert_success', 'refresh');
+    }
+
+    public function update($id)
+    {
+        $dados = [];
+
+        // verifica se existe usuario logado
+        verifica_login();
+
+        // verifica se pedido existe e foi finalizado
+        $pedidos_helper = new Pedidos_helper();
+        $pedidos_helper->verifica_pedido($id, true);
+
+        // caso nao encontre o pedido da erro 404
+        // caso esteja finalizado da erro 404
+        if ($pedidos_helper->status == false) {
+            show_404();
         }
 
         // recuperando lista de colaboradores-fornecedores ativos
         $dados["colaboradores"] = fornecedores_to_select($this->Colaboradores_model->getFornecedoresAtivos());
 
-        // validacao dos campos
-        $this->form_validation->set_rules('colaboradores_id', 'Fornecedor', 'required');
-        $this->form_validation->set_rules('observacao', 'Observação', 'trim|max_length[500]');
+        // valida e edita se sucesso
+        $pedidos_helper->atualizar($id);
 
-        // verifica se formulario foi submetido
-        // se nao foi submetido, mostra o formulario
-        // se foi submetido e nao passou na validacao, mostra o formulario com as mensagens de erro
-        if (!$this->form_validation->run()) {
-            $dados['msg'] = validation_errors();
+        // setando valores para o formulario
+        $dados['pedido'] = $pedidos_helper->pedido;
+
+        // em caso de erros ao editar
+        if ($pedidos_helper->status == false) {
+            $dados['id'] = $pedidos_helper->pedido->id;
+            $dados['msg'] = $pedidos_helper->getErrorsAsHTMLString();
             $this->load->view('Pedidos_Insert', $dados);
             return;
         }
 
-        // pega os dados do formulario
-        $dados_pedido = array(
-            "colaboradores_id" => $this->input->post("colaboradores_id"),
-            "observacao" => $this->input->post("observacao"),
-        );
-
-        // se for um novo pedido
-        if (!$id) {
-            // insere o pedido no banco de dados
-            $id = $this->Pedidos_model->insert($dados_pedido);
-
-            // em caso de sucesso redireciona para a pagina de sucesso
-            redirect('pedidos/insert_success', 'refresh');
-        } else {
-            // atualiza o pedido no banco de dados
-            $this->Pedidos_model->update($id, $dados_pedido);
-
-            // em caso de sucesso redireciona para a pagina de sucesso
-            redirect('pedidos/update_success', 'refresh');
-        }
-
-        // manda pra view
-        $this->load->view('Pedidos_Insert', $dados);
-    }
-
-    public function update($id)
-    {
-        // verifica se existe usuario logado
-        verifica_login();
-
-        // reaproveita a funcao insert passando o id do pedido para edição
-        $this->insert($id);
+        // em caso de sucesso redireciona para a pagina de sucesso
+        redirect('pedidos/update_success', 'refresh');
     }
 
     public function insert_success()

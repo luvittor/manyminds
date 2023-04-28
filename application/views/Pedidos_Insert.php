@@ -15,7 +15,7 @@ $this->load->view('Admin__Header');
     <div class="col-md-5">
 
         <?php
-        if ($id) {
+        if (@$id) {
             echo "<h1>Editar Pedido #$id</h1>";
             echo form_open('pedidos/update/' . $id);
             echo form_hidden('id', set_value('id', $id));
@@ -32,7 +32,7 @@ $this->load->view('Admin__Header');
         echo form_label("Observação", "observacao");
         echo form_textarea('observacao', (set_value('observacao', @$pedido->observacao)));
 
-        if ($id) {
+        if (@$id) {
             echo form_submit("enviar", "Editar", array("class" => "btn btn-info"));
         } else {
             echo form_submit("enviar", "Cadastrar", array("class" => "btn btn-info"));

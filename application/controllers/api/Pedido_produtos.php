@@ -17,6 +17,7 @@ class Pedido_produtos extends REST_Controller
         $this->load->model('Produtos_model');
         $this->load->library("form_validation");
         $this->load->helper('api_helper');
+        $this->load->helper('Pedidos_helper');
     }
 
     public function listar_get($id)
@@ -24,7 +25,17 @@ class Pedido_produtos extends REST_Controller
         check_authorization();
 
         // verifica se pedido existe e NÃO verifica se foi finalizado
-        check_pedido($id, false);
+        $pedidos_helper = new Pedidos_helper();
+        $pedidos_helper->verifica_pedido($id, false);
+
+        // em caso de erro na verificação do pedido
+        if ($pedidos_helper->status == false) {
+            $this->response([
+                'status' => $pedidos_helper->status,
+                'message' => $pedidos_helper->message,
+                'errors' => $pedidos_helper->errors
+            ], $pedidos_helper->http_code);
+        }
 
         $produtos = $this->Pedidos_produtos_model->getProdutos($id);
 
@@ -39,7 +50,17 @@ class Pedido_produtos extends REST_Controller
         check_authorization();
 
         // verifica se pedido existe e foi finalizado
-        check_pedido($id);
+        $pedidos_helper = new Pedidos_helper();
+        $pedidos_helper->verifica_pedido($id, true);
+
+        // em caso de erro na verificação do pedido
+        if ($pedidos_helper->status == false) {
+            $this->response([
+                'status' => $pedidos_helper->status,
+                'message' => $pedidos_helper->message,
+                'errors' => $pedidos_helper->errors
+            ], $pedidos_helper->http_code);
+        }
 
         // validacao da requisição
         $this->form_validation->set_rules('produtos_id', 'Produto', 'required');
@@ -100,7 +121,17 @@ class Pedido_produtos extends REST_Controller
         check_authorization();
 
         // verifica se pedido existe e foi finalizado
-        check_pedido($id);
+        $pedidos_helper = new Pedidos_helper();
+        $pedidos_helper->verifica_pedido($id, true);
+
+        // em caso de erro na verificação do pedido
+        if ($pedidos_helper->status == false) {
+            $this->response([
+                'status' => $pedidos_helper->status,
+                'message' => $pedidos_helper->message,
+                'errors' => $pedidos_helper->errors
+            ], $pedidos_helper->http_code);
+        }
 
         // validacao da requisição
         $this->form_validation->set_rules('pedido_produtos_id', 'Produto do Pedido', 'required');
@@ -136,4 +167,5 @@ class Pedido_produtos extends REST_Controller
             'message' => 'Produto removido do pedido com sucesso.'
         ], REST_Controller::HTTP_OK);
     }
+
 }
