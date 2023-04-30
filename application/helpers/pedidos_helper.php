@@ -37,6 +37,10 @@ class Pedidos_helper extends Controller
         }
 
         $this->status = true;
+        $this->message = '';
+        $this->errors = [];
+        $this->data = [];
+        $this->http_code = REST_Controller::HTTP_OK;
         return true;
     }
 
