@@ -23,7 +23,11 @@ class Colaboradores extends REST_Controller
 
         $this->response([
             'status' => TRUE,
-            'colaboradores' => $colaboradores
+            'message' => '',
+            'errors' => [],
+            'data' => [
+                'colaboradores' => $colaboradores
+            ]
         ], REST_Controller::HTTP_OK);
     }
 }

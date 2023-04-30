@@ -24,7 +24,11 @@ class Produtos extends REST_Controller
 
         $this->response([
             'status' => TRUE,
-            'produtos' => $produtos
+            'message' => '',
+            'errors' => [],
+            'data' => [
+                'produtos' => $produtos
+            ]
         ], REST_Controller::HTTP_OK);
     }
 }

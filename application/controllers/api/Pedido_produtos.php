@@ -33,7 +33,8 @@ class Pedido_produtos extends REST_Controller
             $this->response([
                 'status' => $pedidos_helper->status,
                 'message' => $pedidos_helper->message,
-                'errors' => $pedidos_helper->errors
+                'errors' => $pedidos_helper->errors,
+                'data' => $pedidos_helper->data
             ], $pedidos_helper->http_code);
         }
 
@@ -41,7 +42,11 @@ class Pedido_produtos extends REST_Controller
 
         $this->response([
             'status' => TRUE,
-            'pedido_produtos' => $produtos
+            'message' => '',
+            'errors' => [],
+            'data' => [
+                'pedido_produtos' => $produtos
+            ]
         ], REST_Controller::HTTP_OK);
     }
 
@@ -72,7 +77,8 @@ class Pedido_produtos extends REST_Controller
             $this->response([
                 'status' => FALSE,
                 'message' => 'Erro de validação.',
-                'errors' => $this->form_validation->error_array()
+                'errors' => $this->form_validation->error_array(),
+                'data' => []
             ], REST_Controller::HTTP_BAD_REQUEST);
         }
 
@@ -81,7 +87,9 @@ class Pedido_produtos extends REST_Controller
         if (empty($produto)) {
             $this->response([
                 'status' => FALSE,
-                'message' => 'Produto não encontrado.'
+                'message' => 'Produto não encontrado.',
+                'errors' => ['not_found' => 'Produto não encontrado.'],
+                'data' => []
             ], REST_Controller::HTTP_NOT_FOUND);
         }
 
@@ -89,7 +97,9 @@ class Pedido_produtos extends REST_Controller
         if ($produto->disable) {
             $this->response([
                 'status' => FALSE,
-                'message' => 'Produto desativado.'
+                'message' => 'Produto desativado.',
+                'errors' => ['disable' => 'Produto desativado.'],
+                'data' => []
             ], REST_Controller::HTTP_BAD_REQUEST);
         }
 
@@ -107,8 +117,11 @@ class Pedido_produtos extends REST_Controller
         // retorna que inseriu o produto
         $this->response([
             'status' => TRUE,
-            'message' => 'Produto adicionado ao pedido com sucesso.'
-        ], REST_Controller::HTTP_OK);
+            'message' => 'Produto adicionado ao pedido com sucesso.',
+            'errors' => [],
+            'data' => []
+        ], REST_Controller::HTTP_CREATED);
+
     }
 
     /**
@@ -129,7 +142,8 @@ class Pedido_produtos extends REST_Controller
             $this->response([
                 'status' => $pedidos_helper->status,
                 'message' => $pedidos_helper->message,
-                'errors' => $pedidos_helper->errors
+                'errors' => $pedidos_helper->errors,
+                'data' => $pedidos_helper->data
             ], $pedidos_helper->http_code);
         }
 
@@ -141,7 +155,8 @@ class Pedido_produtos extends REST_Controller
             $this->response([
                 'status' => FALSE,
                 'message' => 'Erro de validação.',
-                'errors' => $this->form_validation->error_array()
+                'errors' => $this->form_validation->error_array(),
+                'data' => []
             ], REST_Controller::HTTP_BAD_REQUEST);
         }
 
@@ -155,8 +170,10 @@ class Pedido_produtos extends REST_Controller
         if ($pedidos_id != $id) {
             $this->response([
                 'status' => FALSE,
-                'message' => 'Id do pedido não corresponde ao pedido do pedido_produtos_id.'
-            ], REST_Controller::HTTP_NOT_FOUND);
+                'message' => 'Requisição inválida.',
+                'errors' => ['pedido_produtos_id' => 'Id do pedido não corresponde ao id do pedido relacionado ao pedido_produtos_id.'],
+                'data' => []
+            ], REST_Controller::HTTP_BAD_REQUEST);
         }
 
         // remove do banco de dados
@@ -164,8 +181,9 @@ class Pedido_produtos extends REST_Controller
 
         $this->response([
             'status' => TRUE,
-            'message' => 'Produto removido do pedido com sucesso.'
+            'message' => 'Produto removido do pedido com sucesso.',
+            'errors' => [],
+            'data' => []
         ], REST_Controller::HTTP_OK);
     }
-
 }

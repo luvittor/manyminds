@@ -28,7 +28,11 @@ class Pedidos extends REST_Controller
         
         $this->response([
             'status' => TRUE,
-            'pedidos' => $pedidos
+            'message' => '',
+            'errors' => [],
+            'data' => [
+                'pedidos_finalizados' => $pedidos
+            ]
         ], REST_Controller::HTTP_OK);
     }
 
@@ -39,7 +43,11 @@ class Pedidos extends REST_Controller
         
         $this->response([
             'status' => TRUE,
-            'pedidos' => $pedidos
+            'message' => '',
+            'errors' => [],
+            'data' => [
+                'pedidos_pendentes' => $pedidos
+            ]
         ], REST_Controller::HTTP_OK);
     }
 
@@ -55,7 +63,8 @@ class Pedidos extends REST_Controller
             $this->response([
                 'status' => $pedidos_helper->status,
                 'message' => $pedidos_helper->message,
-                'errors' => $pedidos_helper->errors
+                'errors' => $pedidos_helper->errors,
+                'data' => $pedidos_helper->data
             ], $pedidos_helper->http_code);
         }
 
@@ -66,7 +75,8 @@ class Pedidos extends REST_Controller
         $this->response([
             'status' => $pedidos_helper->status,
             'message' => $pedidos_helper->message,
-            'errors' => $pedidos_helper->errors
+            'errors' => $pedidos_helper->errors,
+            'data' => $pedidos_helper->data
         ], $pedidos_helper->http_code);
     }
 
@@ -105,7 +115,8 @@ class Pedidos extends REST_Controller
             $this->response([
                 'status' => $pedidos_helper->status,
                 'message' => $pedidos_helper->message,
-                'errors' => $pedidos_helper->errors
+                'errors' => $pedidos_helper->errors,
+                'data' => $pedidos_helper->data
             ], $pedidos_helper->http_code);
         }
 
@@ -116,7 +127,8 @@ class Pedidos extends REST_Controller
         $this->response([
             'status' => $pedidos_helper->status,
             'message' => $pedidos_helper->message,
-            'errors' => $pedidos_helper->errors
+            'errors' => $pedidos_helper->errors,
+            'data' => $pedidos_helper->data
         ], $pedidos_helper->http_code);
     }
 
@@ -132,7 +144,8 @@ class Pedidos extends REST_Controller
             $this->response([
                 'status' => $pedidos_helper->status,
                 'message' => $pedidos_helper->message,
-                'errors' => $pedidos_helper->errors
+                'errors' => $pedidos_helper->errors,
+                'data' => $pedidos_helper->data
             ], $pedidos_helper->http_code);
         }
 
@@ -144,8 +157,12 @@ class Pedidos extends REST_Controller
 
         $this->response([
             'status' => TRUE,
-            'pedido' => $pedido,
-            'pedido_produtos' => $produtos
+            'message' => '',
+            'errors' => [],
+            'data' => [
+                'pedido' => $pedido,
+                'pedido_produtos' => $produtos
+            ]
         ], REST_Controller::HTTP_OK);
     }
 
