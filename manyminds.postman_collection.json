@@ -146,7 +146,7 @@
 			"response": []
 		},
 		{
-			"name": "{{url}}/pedidos/editar/1000",
+			"name": "{{url}}/pedidos/editar/{pedidos_id}",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -171,21 +171,21 @@
 					]
 				},
 				"url": {
-					"raw": "{{url}}/pedidos/editar/1014",
+					"raw": "{{url}}/pedidos/editar/1016",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"pedidos",
 						"editar",
-						"1014"
+						"1016"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "{{url}}/pedidos/exibir/1000",
+			"name": "{{url}}/pedidos/exibir/{pedidos_id}",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -195,21 +195,21 @@
 					}
 				],
 				"url": {
-					"raw": "{{url}}/pedidos/exibir/1014",
+					"raw": "{{url}}/pedidos/exibir/1016",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"pedidos",
 						"exibir",
-						"1014"
+						"1016"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "{{url}}/pedidos/finalizar/1000",
+			"name": "{{url}}/pedidos/finalizar/{pedidos_id}",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -219,21 +219,21 @@
 					}
 				],
 				"url": {
-					"raw": "{{url}}/pedidos/finalizar/1014",
+					"raw": "{{url}}/pedidos/finalizar/1016",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"pedidos",
 						"finalizar",
-						"1014"
+						"1016"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "{{url}}/pedido_produtos/listar/1000",
+			"name": "{{url}}/pedido_produtos/listar/{pedidos_id}",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -243,21 +243,21 @@
 					}
 				],
 				"url": {
-					"raw": "{{url}}/pedido_produtos/listar/1000",
+					"raw": "{{url}}/pedido_produtos/listar/1016",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"pedido_produtos",
 						"listar",
-						"1000"
+						"1016"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "{{url}}/pedido_produtos/adicionar/1000",
+			"name": "{{url}}/pedido_produtos/adicionar/{pedidos_id}",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -271,37 +271,37 @@
 					"formdata": [
 						{
 							"key": "produtos_id",
-							"value": "8",
+							"value": "6",
 							"type": "default"
 						},
 						{
 							"key": "quantidade",
-							"value": "10",
+							"value": "1",
 							"type": "default"
 						},
 						{
 							"key": "preco",
-							"value": "56.99",
+							"value": "179.99",
 							"type": "default"
 						}
 					]
 				},
 				"url": {
-					"raw": "{{url}}/pedido_produtos/adicionar/1014",
+					"raw": "{{url}}/pedido_produtos/adicionar/1016",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"pedido_produtos",
 						"adicionar",
-						"1014"
+						"1016"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "{{url}}/pedido_produtos/remover/1000",
+			"name": "{{url}}/pedido_produtos/remover/{pedidos_id}",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -315,20 +315,20 @@
 					"formdata": [
 						{
 							"key": "pedido_produtos_id",
-							"value": "42",
+							"value": "52",
 							"type": "default"
 						}
 					]
 				},
 				"url": {
-					"raw": "{{url}}/pedido_produtos/remover/1000",
+					"raw": "{{url}}/pedido_produtos/remover/1016",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"pedido_produtos",
 						"remover",
-						"1000"
+						"1016"
 					]
 				}
 			},

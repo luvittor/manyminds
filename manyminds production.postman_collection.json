@@ -146,7 +146,7 @@
 			"response": []
 		},
 		{
-			"name": "{{url}}/pedidos/editar/1000",
+			"name": "{{url}}/pedidos/editar/{pedidos_id}",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -185,7 +185,7 @@
 			"response": []
 		},
 		{
-			"name": "{{url}}/pedidos/exibir/1000",
+			"name": "{{url}}/pedidos/exibir/{pedidos_id}",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -209,7 +209,7 @@
 			"response": []
 		},
 		{
-			"name": "{{url}}/pedidos/finalizar/1000",
+			"name": "{{url}}/pedidos/finalizar/{pedidos_id}",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -233,7 +233,7 @@
 			"response": []
 		},
 		{
-			"name": "{{url}}/pedido_produtos/listar/1000",
+			"name": "{{url}}/pedido_produtos/listar/{pedidos_id}",
 			"request": {
 				"method": "GET",
 				"header": [
@@ -257,7 +257,7 @@
 			"response": []
 		},
 		{
-			"name": "{{url}}/pedido_produtos/adicionar/1000",
+			"name": "{{url}}/pedido_produtos/adicionar/{pedidos_id}",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -301,7 +301,7 @@
 			"response": []
 		},
 		{
-			"name": "{{url}}/pedido_produtos/remover/1000",
+			"name": "{{url}}/pedido_produtos/remover/{pedidos_id}",
 			"request": {
 				"method": "POST",
 				"header": [
