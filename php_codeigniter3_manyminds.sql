@@ -165,7 +165,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `disable`) VALUES
-(1, 'admin', '$2y$10$4VetEUl5K9wKnUMtXOzuf.fv34hvFV6NO88wn87paKuptWfUsl/si', 0),
+(1, 'admin', '$2y$10$50IiYf6PtqtUVhChOyD6VuNVAW0x5a5TGmpCmjLwBLZ3ws6P5oBuG', 0),
 (2, 'admin2', '$2y$10$thzVFYX0yPZCOyhedTViOOjsufbs.qHM5a9Ki13RhPY5VLTXW8Lvq', 1),
 (3, 'joao_silva', '$2y$10$RIgkmAxJ/xZ7bMDgxvtHdeKN2V3udcNf0wTGkaQlZ9Adj7EpgO7pe', 0),
 (4, 'jose_lima', '$2y$10$DmTaVaPWli7K1I2w010Mxea6qFGEK5otXItTSHj1nuzyIguQjLnf2', 1),
