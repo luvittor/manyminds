@@ -13,6 +13,7 @@ class Produtos extends CI_Controller
 		$this->load->library("form_validation");
 		$this->load->model('Produtos_model');
 		$this->load->helper('funcoes');
+        $this->load->helper('Produtos_helper');
 	}
 
     public function index() {
@@ -26,65 +27,23 @@ class Produtos extends CI_Controller
         $this->load->view('Produtos', $dados);
     }
 
-    public function insert($id = false){
+    public function insert(){
         // verifica se existe usuario logado
         verifica_login();
 
-        $dados['id'] = $id;
+        // atualiza o produto
+        $produtos_helper = new Produtos_helper();
+        $produtos_helper->atualizar();
 
-        if ($id) {
-            $dados['produto'] = $this->Produtos_model->getProduto($id);
-
-			// caso nao encontre o produto da erro 404
-			if (!$dados["produto"]) {
-				// erro 404
-				show_404();
-			}
-
-			// caso esteja desabilitado da erro 404
-			if ($dados["produto"]->disable == 1) {
-				// erro 404
-				show_404();
-			}
+        // se houver erros na atualizacao exibe
+        if ($produtos_helper->status == false) {
+            $dados['msg'] = $produtos_helper->getErrorsAsHTMLString();
+            $this->load->view('Produtos_Insert', $dados);
+            return;
         }
 
-        // validacao dos campos
-        $this->form_validation->set_rules('nome', 'Nome', 'required|trim|min_length[3]|max_length[100]');
-        $this->form_validation->set_rules('observacao', 'Observação', 'trim|max_length[500]');
-
-		// verifica se formulario foi submetido
-		// se nao foi submetido, mostra o formulario
-		// se foi submetido e nao passou na validacao, mostra o formulario com as mensagens de erro
-		if (!$this->form_validation->run()) {
-			$dados['msg'] = validation_errors();
-			$this->load->view('Produtos_Insert', $dados);
-			return;
-		}
-
-        // prepara para inserir no banco de dados
-        $dados_produto = [
-            'nome' => $this->input->post('nome'),
-            'observacao' => $this->input->post('observacao'),
-        ];
-
-        // se for edicao, atualiza o registro
-        if ($id) {
-            $this->Produtos_model->update($id, $dados_produto);
-
-			// em caso de sucesso redireciona para a pagina de sucesso
-			redirect('produtos/update_success', 'refresh');
-        } else {
-			// inserindo no banco de dados
-			if (!$this->Produtos_model->insert($dados_produto)) {
-				// caso ocorra algum erro
-				$dados['msg'] = "Erro inesperado ao cadastrar colaborador.";
-				$this->load->view('Produtos_Insert', $dados);
-				return;
-			}
-
-			// em caso de sucesso redireciona para a pagina de sucesso
-			redirect('produtos/insert_success', 'refresh');
-        }
+        // em caso de sucesso redireciona para a pagina de sucesso
+        redirect('produtos/insert_success', 'refresh');
     }
 
 
@@ -107,11 +66,34 @@ class Produtos extends CI_Controller
         // verifica se existe usuario logado
         verifica_login();
 
-		// pega o id do colaborador
+    	// pega o id do produto
 		$id = $this->uri->segment(3);
+        $dados['id'] = $id;
 
-		// reutiliza o método de inserção para fazer a edição
-		$this->insert($id);
+        // verifica se produto existe e esta ativo
+        $produtos_helper = new Produtos_helper();
+        $produtos_helper->verifica_produto($id, true);
+
+        // se produto nao existe ou esta desativado da erro 404
+        if ($produtos_helper->status == false) {
+            show_404();
+        }
+
+        // atualiza o produto
+        $produtos_helper->atualizar($id);
+
+        // mandando dados de produto pra view
+        $dados['produto'] = $produtos_helper->produto;
+
+        // se houver erros na atualizacao exibe
+        if ($produtos_helper->status == false) {
+            $dados['msg'] = $produtos_helper->getErrorsAsHTMLString();
+            $this->load->view('Produtos_Insert', $dados);
+            return;
+        }
+
+        // em caso de sucesso redireciona para a pagina de sucesso
+        redirect('produtos/update_success', 'refresh');
     }
 
 
@@ -164,14 +146,17 @@ class Produtos extends CI_Controller
         // pega o id do produto
         $id = $this->uri->segment(3);
 
-        // pega os dados do produto
-        $dados["produto"] = $this->Produtos_model->getProduto($id);
+        // verifica se produto existe e esta ativo
+        $produtos_helper = new Produtos_helper();
+        $produtos_helper->verifica_produto($id);
 
-        // caso nao encontre o produto da erro 404
-        if (!$dados["produto"]) {
-            // erro 404
+        // se produto está desativado da erro 404
+        if ($produtos_helper->status == false) {
             show_404();
         }
+
+        // pega os dados do produto
+        $dados["produto"] = $produtos_helper->produto;
 
         // manda pra view
         $this->load->view('Produtos_View', $dados);

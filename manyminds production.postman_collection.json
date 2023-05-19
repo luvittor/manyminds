@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "2061b86e-6097-4532-8cf7-de3519781b5e",
 		"name": "manyminds production",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27187407"
 	},
 	"item": [
 		{
@@ -356,6 +357,83 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "{{url}}/produtos/adicionar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Jwt-Authorization",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nome",
+							"value": "Teste",
+							"type": "default"
+						},
+						{
+							"key": "observacao",
+							"value": "",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/produtos/adicionar",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"produtos",
+						"adicionar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/produtos/editar/{produtos_id}",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Jwt-Authorization",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nome",
+							"value": "Alicate",
+							"type": "default"
+						},
+						{
+							"key": "observacao",
+							"value": "",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/produtos/editar/10",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"produtos",
+						"editar",
+						"10"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -386,7 +464,7 @@
 		},
 		{
 			"key": "token",
-			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODI3MTU0MzZ9.4jzTGEsBzWL6N1-uMCjPJ00D5TfbRr07d5LVzurWd14",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODQ1Mjk5MTR9.yr_KlwQHb2TrW0X6PefmvqNNNzTc67ZRD3UwwKbMUFw",
 			"type": "default"
 		}
 	]

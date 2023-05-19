@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "ba23d5d2-5b04-4aa3-9d43-9cdb028a9745",
 		"name": "manyminds",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27187407"
 	},
 	"item": [
 		{
@@ -210,6 +211,17 @@
 		},
 		{
 			"name": "{{url}}/pedidos/finalizar/{pedidos_id}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [
@@ -234,6 +246,17 @@
 		},
 		{
 			"name": "{{url}}/pedido_produtos/listar/{pedidos_id}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [
@@ -281,7 +304,7 @@
 						},
 						{
 							"key": "preco",
-							"value": "179.99",
+							"value": "10.11",
 							"type": "default"
 						}
 					]
@@ -356,6 +379,83 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "{{url}}/produtos/adicionar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Jwt-Authorization",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nome",
+							"value": "Teste",
+							"type": "default"
+						},
+						{
+							"key": "observacao",
+							"value": "",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/produtos/adicionar",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"produtos",
+						"adicionar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/produtos/editar/{produtos_id}",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Jwt-Authorization",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nome",
+							"value": "Chave de Fenda",
+							"type": "default"
+						},
+						{
+							"key": "observacao",
+							"value": "",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/produtos/editar/7",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"produtos",
+						"editar",
+						"7"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -386,7 +486,7 @@
 		},
 		{
 			"key": "token",
-			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODI3MTQ3OTZ9.ENlB7aAxw3NpWDYpqXbBPhfvdC73M_PLzj3qblf_I5E",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJ1c2VybmFtZSI6ImFkbWluIiwiQVBJX1RJTUUiOjE2ODQ1Mjg4OTh9.J89MMx_e2pWNOSwZ629FTWfN6f3mDdEkwOB1TDgnIO8",
 			"type": "default"
 		}
 	]
