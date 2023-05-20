@@ -456,6 +456,68 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "{{url}}/produtos/ativar/{produtos_id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Jwt-Authorization",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{url}}/produtos/ativar/10",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"produtos",
+						"ativar",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{url}}/produtos/desativar/{produtos_id}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Jwt-Authorization",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{url}}/produtos/desativar/10",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"produtos",
+						"desativar",
+						"10"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [

@@ -52,10 +52,10 @@ class Produtos extends CI_Controller
 		// verifica se existe usuario logado
 		verifica_login();
 
-		// pega os dados dos colaboradores do banco de dados
+		// pega os dados dos produtos do banco de dados
 		$dados["produtos"] = $this->Produtos_model->getProdutos();
 
-		// informa que colaborador foi cadastrado com sucesso
+		// informa que produto foi cadastrado com sucesso
 		$dados["msg"] = "Produto cadastrado com sucesso!";
 
 		$this->load->view('Produtos', $dados);
@@ -102,10 +102,10 @@ class Produtos extends CI_Controller
         // verifica se existe usuario logado
         verifica_login();
 
-        // pega os dados dos colaboradores do banco de dados
+        // pega os dados dos produtos do banco de dados
         $dados["produtos"] = $this->Produtos_model->getProdutos();
 
-        // informa que colaborador foi cadastrado com sucesso
+        // informa que produto foi cadastrado com sucesso
         $dados["msg"] = "Produto atualizado com sucesso!";
 
         $this->load->view('Produtos', $dados);
@@ -118,8 +118,18 @@ class Produtos extends CI_Controller
         // pega o id do produto
         $id = $this->uri->segment(3);
 
-        // ativa no banco de dados
-        $this->Produtos_model->enable($id);
+        // verifica se produto existe e se ja nao esta ativado e entao ativa
+        $produtos_helper = new Produtos_helper();
+        $produtos_helper->ativar($id);
+
+        // mostrando erro
+        if ($produtos_helper->status == false) {
+		    // pega os dados dos produtos do banco de dados
+		    $dados["produtos"] = $this->Produtos_model->getProdutos();
+            $dados['msg'] = $produtos_helper->getErrorsAsHTMLString();
+            $this->load->view('produtos', $dados);
+            return;
+        }
 
         // redireciona para a lista
         redirect('produtos', 'refresh');
@@ -132,8 +142,18 @@ class Produtos extends CI_Controller
         // pega o id do produto
         $id = $this->uri->segment(3);
 
-        // desativa no banco de dados
-        $this->Produtos_model->disable($id);
+        // verifica se produto existe e se ja nao esta desativado e entao desativa
+        $produtos_helper = new Produtos_helper();
+        $produtos_helper->desativar($id);
+
+        // mostrando erro
+        if ($produtos_helper->status == false) {
+		    // pega os dados dos produtos do banco de dados
+		    $dados["produtos"] = $this->Produtos_model->getProdutos();
+            $dados['msg'] = $produtos_helper->getErrorsAsHTMLString();
+            $this->load->view('produtos', $dados);
+            return;
+        }
 
         // redireciona para a lista
         redirect('produtos', 'refresh');

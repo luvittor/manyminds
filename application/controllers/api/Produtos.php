@@ -85,5 +85,36 @@ class Produtos extends REST_Controller
         ], $produtos_helper->http_code);
     }
 
+    function ativar_get($id) {
+        check_authorization();
+
+        // ativa se puder, ou retorna erro
+        $produtos_helper = new Produtos_helper();
+        $produtos_helper->ativar($id);
+
+        // retorna resultado
+        $this->response([
+            'status' => $produtos_helper->status,
+            'message' => $produtos_helper->message,
+            'errors' => $produtos_helper->errors,
+            'data' => $produtos_helper->data
+        ], $produtos_helper->http_code);
+    }
+
+    function desativar_get($id) {
+        check_authorization();
+
+        // desativa se puder, ou retorna erro
+        $produtos_helper = new Produtos_helper();
+        $produtos_helper->desativar($id);
+
+        // retorna resultado
+        $this->response([
+            'status' => $produtos_helper->status,
+            'message' => $produtos_helper->message,
+            'errors' => $produtos_helper->errors,
+            'data' => $produtos_helper->data
+        ], $produtos_helper->http_code);
+    }
 
 }

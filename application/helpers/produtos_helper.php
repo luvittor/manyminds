@@ -91,4 +91,79 @@ class Produtos_helper extends Controller
         }
     }
 
+
+    function ativar($id) {
+
+        $ci = &get_instance();
+
+        // verifica se o produto existe
+        $this->produto = $ci->Produtos_model->getProduto($id);
+        if(empty($this->produto)) {
+            $this->status = false;
+            $this->message = 'Erro de validação dos dados.';
+            $this->errors = ['not_found' => 'Produto não encontrado.'];
+            $this->data = [];
+            $this->http_code = REST_Controller::HTTP_NOT_FOUND;
+            return false;
+        }
+
+        // verifica se o produto esta desativado
+        if(!$this->produto->disable) {
+            $this->status = false;
+            $this->message = 'Erro de validação dos dados.';
+            $this->errors = ['disable' => 'Produto já está ativado.'];
+            $this->data = [];
+            $this->http_code = REST_Controller::HTTP_BAD_REQUEST;
+            return false;
+        }
+
+        // ativa o produto
+        $ci->Produtos_model->enable($id);
+
+        $this->status = true;
+        $this->message = 'Produto ativado com sucesso.';
+        $this->errors = [];
+        $this->data = [];
+        $this->http_code = REST_Controller::HTTP_OK;
+        return true;
+    }
+
+
+    function desativar($id) {
+
+        $ci = &get_instance();
+
+        // verifica se o produto existe
+        $this->produto = $ci->Produtos_model->getProduto($id);
+        if(empty($this->produto)) {
+            $this->status = false;
+            $this->message = 'Erro de validação dos dados.';
+            $this->errors = ['not_found' => 'Produto não encontrado.'];
+            $this->data = [];
+            $this->http_code = REST_Controller::HTTP_NOT_FOUND;
+            return false;
+        }
+
+        // verifica se o produto esta desativado
+        if($this->produto->disable) {
+            $this->status = false;
+            $this->message = 'Erro de validação dos dados.';
+            $this->errors = ['disable' => 'Produto já está desativado.'];
+            $this->data = [];
+            $this->http_code = REST_Controller::HTTP_BAD_REQUEST;
+            return false;
+        }
+
+        // desativa o produto
+        $ci->Produtos_model->disable($id);
+
+        $this->status = true;
+        $this->message = 'Produto desativado com sucesso.';
+        $this->errors = [];
+        $this->data = [];
+        $this->http_code = REST_Controller::HTTP_OK;
+        return true;
+
+    }
+
 }
