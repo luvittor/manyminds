@@ -111,7 +111,7 @@ class Produtos_helper extends Controller
         if(!$this->produto->disable) {
             $this->status = false;
             $this->message = 'Erro de validação dos dados.';
-            $this->errors = ['disable' => 'Produto já está ativado.'];
+            $this->errors = ['enable' => 'Produto já está ativado.'];
             $this->data = [];
             $this->http_code = REST_Controller::HTTP_BAD_REQUEST;
             return false;
