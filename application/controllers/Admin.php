@@ -12,6 +12,7 @@ class Admin extends CI_Controller
 		$this->load->helper('form');
 		$this->load->library("form_validation");
 		$this->load->model('Users_model');
+		$this->load->model('Failed_login_attempts_model');
 		$this->load->helper('funcoes');
 		$this->load->helper('Users_helper');
 	}
